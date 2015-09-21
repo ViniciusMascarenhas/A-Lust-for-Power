@@ -1,3 +1,5 @@
+// 1.0
+
 #ifndef __Load_test__SaveState__
 #define __Load_test__SaveState__
 
