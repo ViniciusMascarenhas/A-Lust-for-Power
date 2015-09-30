@@ -3,13 +3,15 @@
 #include "TileBucket.h"
 #include "Includes.h"
 
+
 TileBucket::TileBucket()
 {
 	FILE * pFile;
 	char mystring [100];
+
+	//Tileset.LoadPNGImage("____.png");
 	
-	
-	pFile = fopen (FILE_PATH "file.txt" , "rw");
+	pFile = fopen (FILE_PATH "map_bg.txt" , "rw");
 	
 	if (pFile == NULL) printf("Error opening file");
 	else 

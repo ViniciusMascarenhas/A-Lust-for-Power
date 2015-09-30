@@ -5,6 +5,11 @@
 
 #include "Includes.h"
 
+//Graphics graphics;
+//Image Tileset;	// global scope
+
+
+
 class TileBucket
 {
 private:
@@ -22,14 +27,16 @@ public:
 	void Stretch (int tx, int ty, int x, int y, int rx, int ry, int w, int h);
 };
 
-TileBucket::TileBucket()
-{
-		
-};
-
 void TileBucket::Rect (int tx, int ty, int x, int y, int w, int h)
 {
 	//graphics.DrawImage2D(x, y, w * TILE, h * TILE, tx * TILE, ty * TILE, w * TILE, h * TILE, Image image);
+	
+	
+};
+
+void TileBucket::Row(int tx, int ty, int x, int y, int w)
+{
+	//
 };
 
 #endif /* defined(__Load_test__TileBucket__) */

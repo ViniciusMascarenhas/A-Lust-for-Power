@@ -13,7 +13,7 @@ void SaveState::load_file()
 	char mystring [100];
 	
 	
-	pFile = fopen (FILE_PATH "file.txt" , "rw");
+	pFile = fopen (FILE_PATH "Save File.txt" , "rw");
 	
 	if (pFile == NULL) printf("Error opening file");
 	else 
