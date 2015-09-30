@@ -29,15 +29,22 @@ public:
 
 void TileBucket::Rect (int tx, int ty, int x, int y, int w, int h)
 {
-	//graphics.DrawImage2D(x, y, w * TILE, h * TILE, tx * TILE, ty * TILE, w * TILE, h * TILE, Image image);
+	//
 	
 	
 };
 
-void TileBucket::Row(int tx, int ty, int x, int y, int w)
+void TileBucket::Row (int tx, int ty, int x, int y, int w)
 {
 	//
 };
+
+void TileBucket::Col (int tx, int ty, int x, int y, int h)
+{
+	//
+};
+
+
 
 #endif /* defined(__Load_test__TileBucket__) */
 
