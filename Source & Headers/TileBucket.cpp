@@ -1,4 +1,4 @@
-// 1.0
+// 1.1
 
 #include "TileBucket.h"
 #include "Includes.h"
@@ -9,23 +9,18 @@ TileBucket::TileBucket()
 	FILE * pFile;
 	char mystring [100];
 
+	char map_file_path[300];	// Pode aumentar o tamanho se precisar.
+	strcpy_s(map_file_path, FILE_PATH);
+	strcat_s(map_file_path, "MapFileBG.txt");
+
 	//Tileset.LoadPNGImage("____.png");
+
+	fopen_s (&pFile, map_file_path , "r");
 	
-	pFile = fopen (FILE_PATH "map_bg.txt" , "rw");
-	
-	if (pFile == NULL) printf("Error opening file");
+	if (pFile == NULL) printf("Error opening map file\n");
 	else 
 	{
-		if (fgets (mystring , 5 , pFile) != NULL) temples = atoi(mystring);		
-		if (fgets (mystring , 5 , pFile) != NULL) hearts = atof(mystring);
-		fgets(mystring, 5, pFile);		
-		if (fgets (mystring , 5 , pFile) != NULL) heart_containers = atoi(mystring);
-		if (fgets (mystring , 5 , pFile) != NULL) mp = atoi(mystring);
-		
-		if (fgets (mystring , 5 , pFile) != NULL) max_mp = atoi(mystring);
-		
-		if (fgets (mystring , 5 , pFile) != NULL) rupees = atoi(mystring);
-		
+		//...
 		
 		fclose (pFile);
 	};

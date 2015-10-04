@@ -1,9 +1,10 @@
-2
-3.25
-5
-4
-10
-15
+101111
+2.75
+8
+6.5
+13.0
+16.50
+50
 
 
 Templos
@@ -12,3 +13,5 @@ Recipientes de corações
 MP
 MP Máximo
 Rupees
+
+íã

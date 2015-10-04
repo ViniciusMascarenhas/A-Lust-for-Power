@@ -1,4 +1,4 @@
-// 1.0
+// 1.1
 
 #ifndef __Load_test__SaveState__
 #define __Load_test__SaveState__
@@ -8,11 +8,12 @@
 class SaveState
 {
 private:
-	int temples;
+	bool temples [6];
 	float hearts;
 	int heart_containers;
-	int mp;
-	int max_mp;
+	float mp;
+	float max_mp;
+	float max_stamina;
 	int rupees;
 	
 public:
@@ -22,12 +23,13 @@ public:
 	//void save_file();
 	void load_file();
 	
-	int get_temples();
+	bool get_temple(int t);
 	float get_hearts();
 	int get_heart_containters();
-	int get_mp();
-	int get_max_mp();
+	float get_mp();
+	float get_max_mp();
 	int get_rupees();
+	float get_max_stamina();
 	
 	bool forest();
 	bool fire();
