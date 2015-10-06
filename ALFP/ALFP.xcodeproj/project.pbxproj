@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		971D4FCC1BBC027000E4A540 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D4FCB1BBC027000E4A540 /* main.cpp */; };
+		971D4FD81BBC02A800E4A540 /* SaveState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D4FD41BBC02A800E4A540 /* SaveState.cpp */; };
+		971D4FD91BBC02A800E4A540 /* TileBucket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D4FD61BBC02A800E4A540 /* TileBucket.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +26,14 @@
 
 /* Begin PBXFileReference section */
 		971D4FC81BBC027000E4A540 /* ALFP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ALFP; sourceTree = BUILT_PRODUCTS_DIR; };
-		971D4FCB1BBC027000E4A540 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		971D4FCB1BBC027000E4A540 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "../../Source & Headers/main.cpp"; sourceTree = "<group>"; };
+		971D4FD21BBC02A800E4A540 /* Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Includes.h; path = "../../Source & Headers/Includes.h"; sourceTree = "<group>"; };
+		971D4FD31BBC02A800E4A540 /* SaveFile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SaveFile.txt; path = "../../Source & Headers/SaveFile.txt"; sourceTree = "<group>"; };
+		971D4FD41BBC02A800E4A540 /* SaveState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveState.cpp; path = "../../Source & Headers/SaveState.cpp"; sourceTree = "<group>"; };
+		971D4FD51BBC02A800E4A540 /* SaveState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveState.h; path = "../../Source & Headers/SaveState.h"; sourceTree = "<group>"; };
+		971D4FD61BBC02A800E4A540 /* TileBucket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TileBucket.cpp; path = "../../Source & Headers/TileBucket.cpp"; sourceTree = "<group>"; };
+		971D4FD71BBC02A800E4A540 /* TileBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileBucket.h; path = "../../Source & Headers/TileBucket.h"; sourceTree = "<group>"; };
+		971D4FDA1BBC031400E4A540 /* MapFileBG.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MapFileBG.txt; path = "../../Source & Headers/MapFileBG.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,13 @@
 			isa = PBXGroup;
 			children = (
 				971D4FCB1BBC027000E4A540 /* main.cpp */,
+				971D4FD21BBC02A800E4A540 /* Includes.h */,
+				971D4FD31BBC02A800E4A540 /* SaveFile.txt */,
+				971D4FD41BBC02A800E4A540 /* SaveState.cpp */,
+				971D4FD51BBC02A800E4A540 /* SaveState.h */,
+				971D4FD61BBC02A800E4A540 /* TileBucket.cpp */,
+				971D4FDA1BBC031400E4A540 /* MapFileBG.txt */,
+				971D4FD71BBC02A800E4A540 /* TileBucket.h */,
 			);
 			path = ALFP;
 			sourceTree = "<group>";
@@ -118,7 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				971D4FD81BBC02A800E4A540 /* SaveState.cpp in Sources */,
 				971D4FCC1BBC027000E4A540 /* main.cpp in Sources */,
+				971D4FD91BBC02A800E4A540 /* TileBucket.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
