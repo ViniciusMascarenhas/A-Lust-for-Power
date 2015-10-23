@@ -1,17 +1,19 @@
-101111
+110000
+11001000110011000
 2.75
-8
 6.5
 13.0
 16.50
 50
-
+100
+1000010
 
 Templos
 Corações
 Recipientes de corações
 MP
 MP Máximo
+Stamina max.
 Rupees
-
-íã
+Farore's Wind, Din's Fire, Nayru's Love
+Easter Eggs!
