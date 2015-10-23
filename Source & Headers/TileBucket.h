@@ -46,9 +46,6 @@ void TileBucket::Col (int tx, int ty, int x, int y, int h)
 
 
 
-#endif /* defined(__Load_test__TileBucket__) */
-
-
 /*
 Funções de construção de tile único:
 Rect (tx, ty, w, h, x, y)
@@ -60,4 +57,9 @@ Funções de construção de múltiplos tiles:
 As_is (tx, ty, w, h, x, y)
 Stretch (tx, ty, w, h, rx, ry, x, y)
 */
+
+
+
+#endif /* defined(__Load_test__TileBucket__) */
+
 
