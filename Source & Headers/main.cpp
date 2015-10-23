@@ -1,18 +1,24 @@
-// 1.1
-
-#include "Includes.h"
+#include "Graphics.h"
 #include "SaveState.h"
 
-int main () 
+Graphics graphics;
+
+void MainLoop(void)
+{
+
+}
+
+int main (void)
 {
 	SaveState ss;
-	//ss.load_file();	
+	ss.load_file();
+	ss.print_report();
+
+	/*graphics.CreateMainWindow(800, 600, "Projeto Exemplo");
 	
-	//printf("\n");
-	printf("Temples:\n\tForest\t%d\n\tFire\t%d\n\tWater\t%d\n\tSpirit\t%d\n\tShadow\t%d\n\tLight\t%d\n\nHearts: %.2f\nHeart Containers: %d\nMP: %.2f\nMax MP: %.2f\nMax Stamina: %.2f\nRupees: %d\n", 
-		ss.forest(), ss.fire(), ss.water(), ss.spirit(), ss.shadow(), ss.light(), 
-		ss.get_hearts(), ss.get_heart_containters(), ss.get_mp(), ss.get_max_mp(), 
-		ss.get_max_stamina(), ss.get_rupees());
-	
+	graphics.SetBackgroundColor(12,12,12);
+	graphics.SetMainLoop(MainLoop);
+	graphics.StartMainLoop();
+	*/
 	return 0;
-};
+}
