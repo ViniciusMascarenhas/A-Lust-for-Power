@@ -14,9 +14,11 @@ void SaveState::load_file()
 	FILE * pFile;
 	char mystring[100];
 	int size = 18;
+	file_good = false;
 	
 	char save_file_path[300];	// Pode aumentar o tamanho se precisar.
-	strcpy_s(save_file_path, FILE_PATH);
+	strcpy_s(save_file_path, PROJECT_PATH);
+	strcat_s(save_file_path, SH);
 	strcat_s(save_file_path, "SaveFile.txt");
 
 	fopen_s (&pFile, save_file_path , "r");
@@ -24,6 +26,8 @@ void SaveState::load_file()
 	if (pFile == NULL) printf("Error opening save file\n");
 	else 
 	{
+		file_good = true;
+
 		if (fgets(mystring, size, pFile) != NULL)
 		{
 			for (int i = 0; i < 6; i++)
@@ -37,9 +41,6 @@ void SaveState::load_file()
 			temples[5] = false; // Se não passou dos primeiros 5 templos, o da Luz não pode ter sido passado.
 		};
 		
-		//fgets(mystring, size, pFile);
-
-		//if (fgets (mystring , size , pFile) != NULL) heart_containers = atoi(mystring);
 		if (fgets(mystring, size, pFile) != NULL)
 		{
 			for (int i = 0; i < 17; i++)
@@ -96,6 +97,16 @@ bool SaveState::spirit()				{ return (temples[3]); };
 bool SaveState::shadow()				{ return (temples[4]); };
 bool SaveState::light()					{ return (temples[5]); };
 
+int SaveState::get_heart_containers()
+{
+	int n = 3;
+	for (int i=0; i<17; i++)
+	{
+		heart_container[i] == true ? n++ : 0;
+	};
+
+	return n;
+};
 
 void SaveState::print_report()
 {
@@ -112,17 +123,59 @@ void SaveState::print_report()
 	printf("Easter Eggs:\n\tForest\t%d\n\tFire\t%d\n\tWater\t%d\n\tSpirit\t%d\n\tShadow\t%d\n\tLight\t%d\n\tHero\t%d\n\n\n",easter_egg[0],easter_egg[1],easter_egg[2],easter_egg[3],easter_egg[4],easter_egg[5],easter_egg[6]);
 };
 
+void pt(bool c) { c ? printf("\t") : 0; };
 
-int SaveState::get_heart_containers()
+void SaveState::print_table()
 {
-	int n = 3;
-	for (int i=0; i<17; i++)
+	if (file_good)
 	{
-		heart_container[i] == true ? n++ : 0;
-	};
+		bool c = true;
 
-	return n;
+		printf("\n\n");
+		pt(c); printf("Hearts:\t\t%5.2f\t/  %d\n",get_hearts(), get_heart_containers());
+		pt(c); printf("Mana:\t\t%5.2f\t/  %.2f\n",get_mp(), get_max_mp());
+		pt(c); printf("Stamina:\txx.xx\t/  %.2f\n",get_max_stamina());
+		pt(c); printf("Rupees:\t\t%2d\t/  %d\n\n\n",get_rupees(), MAX_RUPEES);
+
+		pt(c); printf("Temple\t\tCleared\t\tHearts\t\tEaster Egg\tSpell\n");
+		pt(c); printf("---------------------------------------------------------------------------------\n");
+		pt(c); printf("Forest\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Farore's Wind)\n",
+			forest(),
+			heart_container[0],heart_container[1],heart_container[2],
+			easter_egg[0],spell[0]);
+
+		pt(c); printf("Fire\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Din's Fire)\n",
+			fire(),
+			heart_container[3],heart_container[4],heart_container[5],
+			easter_egg[1],spell[1]);
+
+		pt(c); printf("Water\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Nayru's Love)\n",
+			water(),
+			heart_container[6],heart_container[7],heart_container[8],
+			easter_egg[2],spell[2]);
+
+		pt(c); printf("Spirit\t\t%d\t\t[%d, %d, %d]\t%d\n",spirit(),
+			heart_container[9],heart_container[10],heart_container[11],
+			easter_egg[3],spell[0]);
+
+		pt(c); printf("Shadow\t\t%d\t\t[%d, %d, %d]\t%d\n",shadow(),
+			heart_container[12],heart_container[13],heart_container[14],
+			easter_egg[4],spell[0]);
+
+		pt(c); printf("Light\t\t%d\t\t[-------]\t%d\n",light(),
+			easter_egg[5],spell[0]);
+
+		pt(c); printf("Heart containers from Merchant:\t[%d  ,  %d]\n",
+			heart_container[15], heart_container[16]);
+
+		pt(c); printf("Hero's easter egg:\t\t\t\t%d\n",easter_egg[6]);
+	
+
+		printf("\n\n");
+	};
 };
+
+
 
 
 #endif

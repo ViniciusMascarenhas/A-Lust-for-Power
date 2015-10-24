@@ -4,16 +4,16 @@
 6.5
 13.0
 16.50
-50
+60
 100
 1000100
 
-Templos
-Corações
-Recipientes de corações
+Temples
+Heart containers
+Hearts
 MP
-MP Máximo
-Stamina max.
+Max. MP
+Max. Stamina
 Rupees
-Farore's Wind, Din's Fire, Nayru's Love
-Easter Eggs!
+Spells
+Easter Eggs
