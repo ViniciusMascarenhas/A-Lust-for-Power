@@ -19,11 +19,12 @@ int main (void)
 	graphics.SetBackgroundColor(32,32,32);
 	
 	char image_file_path[300];
-	strcpy_s(image_file_path,PROJECT_PATH);
-	strcat_s(image_file_path, CR);
+	strcpy_s(image_file_path,PROJECT_PATH); // Caminho no meu computador
+	strcat_s(image_file_path, CR); // ~/Resources/Sprites/Chars/Raw/
 	strcat_s(image_file_path, "Medallions.png");
-	printf("%s\n\n",image_file_path);
-	image.LoadPNGImage(image_file_path); //Na mesma pasta
+	printf("%s\n\n",image_file_path); // Para verificar a string
+
+	image.LoadPNGImage(image_file_path);
 
 	graphics.SetMainLoop(MainLoop);
 	graphics.StartMainLoop();
