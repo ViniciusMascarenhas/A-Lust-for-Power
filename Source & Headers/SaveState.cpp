@@ -132,6 +132,7 @@ void SaveState::print_table()
 		bool c = true;
 
 		printf("\n\n");
+		//printf("0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t15\n");
 		pt(c); printf("Hearts:\t\t%5.2f\t/  %d\n",get_hearts(), get_heart_containers());
 		pt(c); printf("Mana:\t\t%5.2f\t/  %.2f\n",get_mp(), get_max_mp());
 		pt(c); printf("Stamina:\txx.xx\t/  %.2f\n",get_max_stamina());
@@ -169,65 +170,70 @@ void SaveState::print_table()
 			heart_container[15], heart_container[16]);
 
 		pt(c); printf("Hero's easter egg:\t\t\t\t%d\n",easter_egg[6]);
-	
 
 		printf("\n\n");
 	};
 };
 
 
-void SaveState::graphics_print_table (Graphics g)
+void SaveState::graphics_print_table (Graphics g) // Corrigir todas as tabulações e quebras de linha
 {
 	if (file_good)
 	{
 		bool c = true;
-		int x = 50;
-		int y = 740;
-		int h = 32;
+		int x[64];
+		int y = 650;
+		int h = 28;
+
+		for (int i=0; i<64; i++)
+			x[i]=8*i+50;
 		
 		g.SetTextFont ("Consolas", 16, FONT_WEIGHT_NORMAL, false, false);
 
-		g.DrawText2D (x,y,"\n\n"); y-= h;
-		g.DrawText2D (x,y,"Hearts:\t\t%5.2f\t/  %d\n",get_hearts(), get_heart_containers()); y-= h;
-		g.DrawText2D (x,y,"Mana:\t\t%5.2f\t/  %.2f\n",get_mp(), get_max_mp()); y-= h;
-		g.DrawText2D (x,y,"Stamina:\txx.xx\t/  %.2f\n",get_max_stamina()); y-= h;
-		g.DrawText2D (x,y,"Rupees:\t\t%2d\t/  %d\n\n\n",get_rupees(), MAX_RUPEES); y-= h;
+		g.DrawText2D (x[0],y,"Hearts:");
+		g.DrawText2D (x[6],y,"%5.2f/",get_hearts());
+		g.DrawText2D (x[9],y,"%d",get_heart_containers());		
+		y-= h;
 
-		g.DrawText2D (x,y,"Temple\t\tCleared\t\tHearts\t\tEaster Egg\tSpell\n"); y-= h;
-		g.DrawText2D (x,y,"---------------------------------------------------------------------------------\n"); y-= h;
-		g.DrawText2D (x,y,"Forest\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Farore's Wind)\n",
+		g.DrawText2D (x[0],y,"Mana:\t\t%5.2f\t/  %.2f\n",get_mp(), get_max_mp()); y-= h;
+		g.DrawText2D (x[0],y,"Stamina:\txx.xx\t/  %.2f\n",get_max_stamina()); y-= h;
+		g.DrawText2D (x[0],y,"Rupees:\t\t%2d\t/  %d\n\n\n",get_rupees(), MAX_RUPEES); y-= 2*h;
+
+		g.DrawText2D (x[0],y,"Temple\t\tCleared\t\tHearts\t\tEaster Egg\tSpell\n"); y-= h;
+		g.DrawText2D (x[0],y,"---------------------------------------------------------------------------------\n"); y-= h;
+		g.DrawText2D (x[0],y,"Forest\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Farore's Wind)\n",
 			forest(),
 			heart_container[0],heart_container[1],heart_container[2],
 			easter_egg[0],spell[0]); y-= h;
 
-		g.DrawText2D (x,y,"Fire\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Din's Fire)\n",
+		g.DrawText2D (x[0],y,"Fire\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Din's Fire)\n",
 			fire(),
 			heart_container[3],heart_container[4],heart_container[5],
 			easter_egg[1],spell[1]); y-= h;
 
-		g.DrawText2D (x,y,"Water\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Nayru's Love)\n",
+		g.DrawText2D (x[0],y,"Water\t\t%d\t\t[%d, %d, %d]\t%d\t\t%d (Nayru's Love)\n",
 			water(),
 			heart_container[6],heart_container[7],heart_container[8],
 			easter_egg[2],spell[2]); y-= h;
 
-		g.DrawText2D (x,y,"Spirit\t\t%d\t\t[%d, %d, %d]\t%d\n",spirit(),
+		g.DrawText2D (x[0],y,"Spirit\t\t%d\t\t[%d, %d, %d]\t%d\n",spirit(),
 			heart_container[9],heart_container[10],heart_container[11],
 			easter_egg[3],spell[0]); y-= h;
 
-		g.DrawText2D (x,y,"Shadow\t\t%d\t\t[%d, %d, %d]\t%d\n",shadow(),
+		g.DrawText2D (x[0],y,"Shadow\t\t%d\t\t[%d, %d, %d]\t%d\n",shadow(),
 			heart_container[12],heart_container[13],heart_container[14],
 			easter_egg[4],spell[0]); y-= h;
 
-		g.DrawText2D (x,y,"Light\t\t%d\t\t[-------]\t%d\n",light(),
+		g.DrawText2D (x[0],y,"Light\t\t%d\t\t[-------]\t%d\n",light(),
 			easter_egg[5],spell[0]); y-= h;
 
-		g.DrawText2D (x,y,"Heart containers from Merchant:\t[%d  ,  %d]\n",
+		g.DrawText2D (x[0],y,"Heart containers from Merchant:\t[%d  ,  %d]\n",
 			heart_container[15], heart_container[16]); y-= h;
 
-		g.DrawText2D (x,y,"Hero's easter egg:\t\t\t\t%d\n",easter_egg[6]); y-= h;
+		g.DrawText2D (x[0],y,"Hero's easter egg:\t\t\t\t%d\n",easter_egg[6]); y-= h;
 	
 
-		g.DrawText2D (x,y,"\n\n"); y-= h;
+		g.DrawText2D (x[0],y,"\n\n"); y-= h;
 	};
 };
 
