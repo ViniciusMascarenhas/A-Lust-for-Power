@@ -1,7 +1,7 @@
 // 1.1
 
-#ifndef __Load_test__SaveState__
-#define __Load_test__SaveState__
+#ifndef __SaveState__
+#define __SaveState__
 
 #include "Defines.h"
 #include "Graphics.h"
@@ -46,6 +46,7 @@ public:
 
 	void print_report();
 	void print_table();
+	void graphics_print_table (Graphics g);
 };
 
-#endif /* defined(__Load_test__SaveState__) */
+#endif /* defined(__SaveState__) */

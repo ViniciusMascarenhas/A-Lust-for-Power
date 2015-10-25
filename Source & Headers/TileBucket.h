@@ -1,7 +1,7 @@
 // 1.0
 
-#ifndef __Load_test__TileBucket__
-#define __Load_test__TileBucket__
+#ifndef __TileBucket__
+#define __TileBucket__
 
 #include "Defines.h"
 
@@ -60,6 +60,6 @@ Stretch (tx, ty, w, h, rx, ry, x, y)
 
 
 
-#endif /* defined(__Load_test__TileBucket__) */
+#endif /* defined(__TileBucket__) */
 
 

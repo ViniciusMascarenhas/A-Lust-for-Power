@@ -210,3 +210,25 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+Source & Headers/Visual Studio Settings/Exported-2015-10-23.vssettings
+Source & Headers/bass.dll
+Source & Headers/Audio.h
+Source & Headers/freeglut.dll
+Source & Headers/freeglut.h
+Source & Headers/freeglut_ext.h
+Source & Headers/freeglut_std.h
+Source & Headers/glu32.dll
+Source & Headers/glut.h
+Source & Headers/Medallions.png
+Source & Headers/opengl32.dll
+*.lib
+*.sln
+*.vcxproj
+*.filters
+Source & Headers/PlayLib_2010/Audio.h
+*.dll
+Source & Headers/PlayLib_2010/freeglut.h
+Source & Headers/PlayLib_2010/freeglut_ext.h
+Source & Headers/PlayLib_2010/freeglut_std.h
+Source & Headers/PlayLib_2010/glut.h
+Source & Headers/PlayLib_2010/Graphics.h
