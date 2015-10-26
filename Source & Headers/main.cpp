@@ -21,7 +21,7 @@ void MainLoop(void)
 	graphics.DrawLine2D (460,60,700,90);
 	*/
 
-	save_state.graphics_print_table(graphics);
+	//save_state.graphics_print_table(graphics);
 }
 
 int main (void)
@@ -31,10 +31,10 @@ int main (void)
 	graphics.CreateMainWindow(1024, 768, "A Lust for Power");
 	
 	char medallions_path[512];
-	path (medallions_path, CR, "Medallions.png");
-//	printf("Test:\t\t%s\n\n", medallions_path);
+	path (medallions_path, CR, "Creepy Poe Salesman.png");
+	//printf("Test:\t\t%s\n\n", medallions_path);
 
-	medallions_image.LoadPNGImage("Medallions.png");
+	medallions_image.LoadPNGImage(medallions_path);
 
 	graphics.SetMainLoop(MainLoop);
 	graphics.StartMainLoop();
