@@ -30,8 +30,6 @@ public:
 void TileBucket::Rect (int tx, int ty, int x, int y, int w, int h)
 {
 	//
-	
-	
 };
 
 void TileBucket::Row (int tx, int ty, int x, int y, int w)
