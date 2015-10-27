@@ -4,37 +4,37 @@
 
 SaveState save_state;
 Graphics graphics;
-Image medallions_image;
+Image image;
+Image image_in_same_folder;
 
 void MainLoop(void)
 {
-	graphics.SetBackgroundColor(32,32,40);
-	
-	graphics.DrawImage2D (10,10,300,300,medallions_image);
+	//image.SetPosition (240,200,65,79);									// Usei isso com o outro protótipo de DrawImage2D.
+	//image_in_same_folder.SetPosition (335,200,65,79);
+	graphics.DrawImage2D (240,200,65,79,15,18,65,79,image);					// A do caminho completo, em uma pasta dedicada.
+	graphics.DrawImage2D (335,200,65,79,15,18,65,79,image_in_same_folder);	// A da mesma pasta que o código do projeto.
 
-
-	/*
-	graphics.SetColor (0,0,200);
-	graphics.FillRectangle2D (400,300,650,550);
-	
-	graphics.SetLineWidth(6);
-	graphics.DrawLine2D (460,60,700,90);
+	// Tudo isso aqui abaixo funciona. Deixei comentado para voltar a usar como teste.
+	/*		graphics.SetColor (0,0,200);
+			graphics.FillRectangle2D (400,300,650,550);
+			graphics.SetLineWidth(6);
+			graphics.DrawLine2D (460,60,700,90);
 	*/
-
-	//save_state.graphics_print_table(graphics);
 }
 
 int main (void)
 {
-	save_state.print_table();	
+	//save_state.print_table();						// Exibe na tela o arquivo de exemplo SaveFile.txt.
 	
-	graphics.CreateMainWindow(1024, 768, "A Lust for Power");
+	graphics.CreateMainWindow(640, 480, "A Lust for Power");
+	graphics.SetBackgroundColor(32,32,40);
 	
-	char medallions_path[512];
-	path (medallions_path, CR, "Creepy Poe Salesman.png");
-	//printf("Test:\t\t%s\n\n", medallions_path);
-
-	medallions_image.LoadPNGImage(medallions_path);
+	char image_path[512];							// Para guardar o caminho completo do nome do arquivo de imagem.
+	path (image_path, CR, "Ganon.png");				// Usa os defines em Defines.h para concatenar o caminho completo.
+	if (0) printf("Test:\t\t%s\n\n", image_path);	// Exibe o caminho para verificar se está correto -- e está.
+	image.LoadPNGImage(image_path);					// Problema aqui ou na chamada de Graphics::DrawImage2D(...).
+	
+	image_in_same_folder.LoadPNGImage("Ganon.png");	// Esta imagem está na mesma pasta do código do projeto.
 
 	graphics.SetMainLoop(MainLoop);
 	graphics.StartMainLoop();

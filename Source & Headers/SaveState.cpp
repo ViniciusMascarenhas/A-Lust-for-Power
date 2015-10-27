@@ -108,21 +108,6 @@ int SaveState::get_heart_containers()
 	return n;
 };
 
-void SaveState::print_report()
-{
-	printf("Temples:\n\tForest\t%d\n\tFire\t%d\n\tWater\t%d\n\tSpirit\t%d\n\tShadow\t%d\n\tLight\t%d\n\n",
-		forest(), fire(), water(), spirit(), shadow(), light() );
-
-	printf ("Heart Containers (%d):\n\tForest\t[%d, %d, %d]\n\tFire\t[%d, %d, %d]\n\tWater\t[%d, %d, %d]\n\tSpirit\t[%d, %d, %d]\n\tShadow\t[%d, %d, %d]\n\tMerchant[%d, %d]\n\n", get_heart_containers(), heart_container[0],heart_container[1],heart_container[2],heart_container[3],heart_container[4],heart_container[5],heart_container[6],heart_container[7],heart_container[8],heart_container[9],heart_container[10],heart_container[11],heart_container[12],heart_container[13],heart_container[14],heart_container[15],heart_container[16],heart_container[17]);
-
-
-	printf("Hearts: %.2f\nMP: %.2f\nMax MP: %.2f\nMax Stamina: %.2f\nRupees: %d\n", get_hearts(), get_mp(), get_max_mp(), get_max_stamina(), get_rupees());
-
-	printf("Spells:\n\tFarore's Wind\t%d\n\tDin's Fire\t%d\n\tNayru's Love\t%d\n\n",spell[0], spell[1], spell[2]);
-
-	printf("Easter Eggs:\n\tForest\t%d\n\tFire\t%d\n\tWater\t%d\n\tSpirit\t%d\n\tShadow\t%d\n\tLight\t%d\n\tHero\t%d\n\n\n",easter_egg[0],easter_egg[1],easter_egg[2],easter_egg[3],easter_egg[4],easter_egg[5],easter_egg[6]);
-};
-
 void pt(bool c) { c ? printf("\t") : 0; };
 
 void SaveState::print_table()
@@ -133,10 +118,10 @@ void SaveState::print_table()
 
 		printf("\n\n");
 		//printf("0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t15\n");
-		pt(c); printf("Hearts:\t\t%5.2f\t/  %d\n",get_hearts(), get_heart_containers());
-		pt(c); printf("Mana:\t\t%5.2f\t/  %.2f\n",get_mp(), get_max_mp());
-		pt(c); printf("Stamina:\txx.xx\t/  %.2f\n",get_max_stamina());
-		pt(c); printf("Rupees:\t\t%2d\t/  %d\n\n\n",get_rupees(), MAX_RUPEES);
+		pt(c); printf("Hearts:\t\t%5.2f\t/% 4d\n",get_hearts(), get_heart_containers());
+		pt(c); printf("Mana:\t\t%5.2f\t/ % 4.2f\n",get_mp(), get_max_mp());
+		pt(c); printf("Stamina:\txx.xx\t/ % 4.2f\n",get_max_stamina());
+		pt(c); printf("Rupees:\t\t%2d\t/% 4d\n\n\n",get_rupees(), MAX_RUPEES);
 
 		pt(c); printf("Temple\t\tCleared\t\tHearts\t\tEaster Egg\tSpell\n");
 		pt(c); printf("---------------------------------------------------------------------------------\n");
