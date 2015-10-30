@@ -1,2 +1,0 @@
-Este arquivo só existe para que a pasta Grid não fique vazia e possa existir no GitHub.
-
