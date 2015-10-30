@@ -7,20 +7,12 @@
 #include <string.h>
 #include <stdio.h>
 
-/* Os #defines abaixo devem ter os caminhos para as pastas nas suas máquinas, incluindo
-"\\" no final. Não mexer nos #defines dos coleguinhas! */
-
 #define GABRIEL_PATH	""
 #define JOQAUIM_PATH	""
 #define LEONARDO_PATH	""
 #define LUCCA_PATH		""
 #define ROBERTO_PATH	""
-#define VINICIUS_PATH	"C:\\Users\\Admin\\Documents\\GitHub\\A-Lust-for-Power\\"
-
-/* No #define abaixo, trocar o símbolo da direita pela constante definida correspondente
-ao caminho da pasta Source & Headers do projeto na sua máquina.
-Se alguém usar mais de uma máquina, deverá criar defines adicionais nas linhas acima para trocar o símbolo
-abaixo. Por exemplo: FULANO_DESKTOP_PATH, FULANO_LAPTOP_PATH, etc. */
+#define VINICIUS_PATH	"\\\\Mac\\Home\\Projects\\A-Lust-for-Power\\"
 
 #define PROJECT_PATH VINICIUS_PATH
 
