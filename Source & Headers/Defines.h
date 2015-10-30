@@ -21,7 +21,8 @@
 
 #define SH "Source & Headers\\"
 #define CR "Resources\\Sprites\\Chars\\Raw\\"
-#define CG "Resources\\Sprites\\Chars\\Grid\\"
+#define CO "Resources\\Sprites\\Chars\\Ongoing\\"
+#define CS "Resources\\Sprites\\Chars\\Sheet\\"
 #define TR "Resources\\Sprites\\Terrenos\\"
 
 void path (char* ptr, const char* sub_folder_path, const char* file_name);
