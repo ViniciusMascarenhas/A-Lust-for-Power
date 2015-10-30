@@ -1,7 +1,7 @@
 // 1.1
 
 #include "TileBucket.h"
-#include "Includes.h"
+#include "Defines.h"
 
 TileBucket::TileBucket()
 {
@@ -9,7 +9,7 @@ TileBucket::TileBucket()
 	char mystring [100];
 
 	char map_file_path[300];	// Pode aumentar o tamanho se precisar.
-	strcpy_s(map_file_path, FILE_PATH);
+	strcpy_s(map_file_path, PROJECT_PATH);
 	strcat_s(map_file_path, "MapFileBG.txt");
 
 	//Tileset.LoadPNGImage("____.png");
