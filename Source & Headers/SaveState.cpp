@@ -4,7 +4,10 @@
 
 #include "SaveState.h"
 
-SaveState::SaveState() { load_file(); };
+SaveState::SaveState()
+{
+	load_file();
+};
 
 //void save_file();
 
@@ -41,7 +44,17 @@ void SaveState::load_file()
 		if (!(forest() && fire() && water() && spirit() && shadow()))
 		{
 			temples[5] = false; // Se não passou dos primeiros 5 templos, o da Luz não pode ter sido passado.
+			phase=0;
+		}
+		else
+		{
+			if (!light())
+				phase=1;
+			else
+				phase=2;
 		};
+
+		printf ("Loading save file... Phase = %d\n\n", phase);
 		
 		if (fgets(mystring, size, pFile) != NULL)
 		{
@@ -92,6 +105,22 @@ float SaveState::get_max_mp()			{ return max_mp;			};
 float SaveState::get_max_stamina()		{ return max_stamina;		};
 int SaveState::get_rupees()				{ return rupees;			};
 
+int SaveState::get_phase()
+{
+	return phase;
+};
+
+void SaveState::tweak_phase()
+{
+	switch (phase)
+	{
+		case 0: case 1: phase++; break;
+		case 2: phase = 0; break;
+	};
+	
+	temples[5] = (phase==2) ? true : false;
+};
+
 bool SaveState::forest()				{ return (temples[0]); };
 bool SaveState::fire()					{ return (temples[1]); };
 bool SaveState::water()					{ return (temples[2]); };
@@ -99,9 +128,37 @@ bool SaveState::spirit()				{ return (temples[3]); };
 bool SaveState::shadow()				{ return (temples[4]); };
 bool SaveState::light()					{ return (temples[5]); };
 
+void SaveState::tweak_temple (int i)
+{
+	temples[i] = !temples[i];
+
+	if (light())
+		phase = 2;
+
+	if (!light())
+		phase = 1;
+
+	if (! (forest() && fire() && water() && spirit() && shadow() ))
+	{
+		phase = 0;
+		temples[5] = false;
+	};
+
+};
+
 bool SaveState::get_easter_egg (int i)
 {
 	return easter_egg[i];
+};
+
+void SaveState::set_easter_egg (int i, bool b)
+{
+	easter_egg[i] = b;
+};
+
+void SaveState::tweak_easter_egg (int i)
+{
+	easter_egg[i] = !easter_egg[i];
 };
 
 int SaveState::get_heart_containers()

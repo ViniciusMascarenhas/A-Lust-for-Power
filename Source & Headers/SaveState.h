@@ -21,6 +21,7 @@ private:
 	int rupees;
 	bool spell[3];
 	bool easter_egg[7];
+	int phase;
 	
 public:
 	
@@ -36,6 +37,9 @@ public:
 	float get_max_mp();
 	int get_rupees();
 	float get_max_stamina();
+
+	int get_phase();
+	void tweak_phase();
 	
 	bool forest();
 	bool fire();
@@ -43,8 +47,11 @@ public:
 	bool spirit();
 	bool shadow();
 	bool light();
+	void tweak_temple (int i);
 
+	void set_easter_egg (int i, bool b);
 	bool get_easter_egg (int i);
+	void tweak_easter_egg (int i);
 
 	void print_report();
 	void print_table();
