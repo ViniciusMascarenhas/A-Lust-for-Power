@@ -99,6 +99,11 @@ bool SaveState::spirit()				{ return (temples[3]); };
 bool SaveState::shadow()				{ return (temples[4]); };
 bool SaveState::light()					{ return (temples[5]); };
 
+bool SaveState::get_easter_egg (int i)
+{
+	return easter_egg[i];
+};
+
 int SaveState::get_heart_containers()
 {
 	int n = 3;

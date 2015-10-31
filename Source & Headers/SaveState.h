@@ -44,6 +44,8 @@ public:
 	bool shadow();
 	bool light();
 
+	bool get_easter_egg (int i);
+
 	void print_report();
 	void print_table();
 	void graphics_print_table (Graphics g);
