@@ -33,3 +33,12 @@ void KeyboardInput(int key, int state, int x, int y);
 void halt();
 
 #endif /* defined(__Defines__) */
+
+
+/*
+
+Easter Egg sprite size: 49 x 51
+
+
+
+*/
