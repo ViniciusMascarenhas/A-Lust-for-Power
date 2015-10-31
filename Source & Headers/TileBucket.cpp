@@ -8,15 +8,12 @@ TileBucket::TileBucket()
 	FILE * pFile;
 	char mystring [100];
 
-	char map_file_path[300];	// Pode aumentar o tamanho se precisar.
-	strcpy_s(map_file_path, PROJECT_PATH);
-	strcat_s(map_file_path, "MapFileBG.txt");
-
-	//Tileset.LoadPNGImage("____.png");
+	char map_file_path[FILE_PATH_SIZE];
+	cat_path (map_file_path, SH, "MapFileBG.txt");
 
 	fopen_s (&pFile, map_file_path , "r");
 	
-	if (pFile == NULL) printf("Error opening map file\n");
+	if (pFile == NULL) printf("Error opening background map file\n");
 	else 
 	{
 		//...
