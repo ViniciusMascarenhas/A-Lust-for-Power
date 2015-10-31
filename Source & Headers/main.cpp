@@ -8,14 +8,41 @@ SaveState save_state;
 iGraphics iGraph;
 Image Ganondorfs_castle;
 LiveSprite Ganondorf (40, 40, 1, 0, 80, 190);
+Sprite portal (270, 270, 0, 0, 0, 0);
 Sprite prize_table (83, 46, 0, 0, 18, 363);
 Sprite easter_egg (49, 51, 0, 0, 18, 363);
 
-void MainLoop(void)
+int light_portal;
+
+void load_images()
+{
+	char Ganondorfs_castle_path[FILE_PATH_SIZE];
+	//cat_path (Ganondorfs_castle_path, "Level Design\\Casa do Ganondorf\\", "Casa do Ganondorf.png");
+	cat_path (Ganondorfs_castle_path, CO, "Castle with organ and statues.png");
+	Ganondorfs_castle.LoadPNGImage(Ganondorfs_castle_path);
+	
+	Ganondorf.load (CO, "Ganondorf.png");
+	portal.load (CO, "Portals.png");
+	prize_table.load (CS, "Prize Table.png");
+	easter_egg.load (CO, "Easter Eggs.png");
+};
+
+void main_loop()
 {
 	iGraph.DrawImage2D (0,0,736,448,0,0,736,448,Ganondorfs_castle);
 	Ganondorf.draw (&iGraph);
 	//Ganondorf.print_pos();
+
+	for (int i=0; i<5; i++)
+	{
+		portal.select_frame (i,0);
+		portal.set_position (-70 + i*120, 0);
+		portal.draw (&iGraph);
+	};
+
+		portal.select_frame (light_portal,0);
+		portal.set_position (-70 + 5*120, 0);
+		portal.draw (&iGraph);
 	
 	for (int i=0; i<6; i++)
 		if (1) //(save_state.get_easter_egg(i))
@@ -40,22 +67,16 @@ void MainLoop(void)
 
 int main (void)
 {
+	light_portal = 5;
 	save_state.print_table();
 	
 	iGraph.CreateMainWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "A Lust for Power");
 	iGraph.SetKeyboardInput(KeyboardInput);
 	iGraph.SetBackgroundColor (26,32,40);
 
-	char Ganondorfs_castle_path[FILE_PATH_SIZE];
-	cat_path (Ganondorfs_castle_path, "Level Design\\Casa do Ganondorf\\", "Casa do Ganondorf.png");
-	printf("%s\n",Ganondorfs_castle_path);
-	Ganondorfs_castle.LoadPNGImage(Ganondorfs_castle_path);
-	
-	Ganondorf.load (CO, "Ganondorf.png");
-	prize_table.load (CS, "Prize Table.png");
-	easter_egg.load (CO, "Easter Eggs.png");
+	load_images();
 
-	iGraph.SetMainLoop(MainLoop);
+	iGraph.SetMainLoop(main_loop);
 	iGraph.StartMainLoop();
 
 
@@ -87,10 +108,23 @@ void KeyboardInput(int key, int state, int x, int y)
 	if ((key == KEY_UP) && (state == KEY_STATE_DOWN))
 		Ganondorf.move (-Ganondorf.get_current_speed(), vertical);
 
+	if ((key == ' ' + KEY_RIGHT) && state==KEY_STATE_DOWN)
+	{
+		Ganondorf.move (4 * Ganondorf.get_current_speed(), horizontal);
+	}
+
 	if ((key == ' ') && (state == KEY_STATE_DOWN))
 	{
 		Ganondorf.toggle_dashing();
 	};
+
+
+	if ((key == 'p') && (state == KEY_STATE_DOWN))
+		switch (light_portal)
+		{
+			case 5: case 6: light_portal++; break;
+			case 7: light_portal = 5; break;
+		};
 	
 
 	if ((key == 'v') && (state == KEY_STATE_DOWN))
