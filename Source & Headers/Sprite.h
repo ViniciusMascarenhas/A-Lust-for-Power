@@ -16,7 +16,7 @@ enum axis
 
 class Sprite : public Image
 {
-	private:
+	protected:
 		int screen_x;
 		int screen_y;
 		int sheet_x;
@@ -26,16 +26,20 @@ class Sprite : public Image
 		char path[FILE_PATH_SIZE];
 
 	public:
+		Sprite ();
 		Sprite (int w, int h, const char* p);
 		Sprite (int w, int h);
 		Sprite (int w, int h, int sheet_X, int sheet_Y, int screen_X, int screen_Y);
 		void load (const char* sub_folder_path, char* file_name);
 		void load_direct (char* file_path);
+		void set_position (int x, int y);
 		void draw (Graphics* g);
 		void draw (iGraphics* i);
 		void set_frame_width (int w);
 		void set_frame_height (int h);
+		void select_frame (int x, int y);
 		void print_path();
+		void print_pos ();
 		void move (int x, int y);
 		void move (int n, axis a);
 };
