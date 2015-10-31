@@ -8,11 +8,10 @@ SaveState save_state;
 iGraphics iGraph;
 Image Ganondorfs_castle;
 LiveSprite Ganondorf (40, 40, 1, 0, 80, 190);
-Sprite portal (270, 270, 0, 0, 0, 0);
-Sprite prize_table (83, 46, 0, 0, 18, 363);
-Sprite easter_egg (49, 51, 0, 0, 18, 363);
-
-int light_portal;
+Sprite portal (270, 270);
+Sprite medallion (50, 50);
+Sprite prize_table (83, 46);
+Sprite easter_egg (49, 51);
 
 void load_images()
 {
@@ -22,7 +21,10 @@ void load_images()
 	Ganondorfs_castle.LoadPNGImage(Ganondorfs_castle_path);
 	
 	Ganondorf.load (CO, "Ganondorf.png");
+	Ganondorf.select_frame (0, 2);
+	Ganondorf.set_position ((SCREEN_WIDTH - Ganondorf.get_frame_width()) / 2 - 8, 345);
 	portal.load (CO, "Portals.png");
+	medallion.load (CO, "Medallions.png");
 	prize_table.load (CS, "Prize Table.png");
 	easter_egg.load (CO, "Easter Eggs.png");
 };
@@ -33,19 +35,31 @@ void main_loop()
 	Ganondorf.draw (&iGraph);
 	//Ganondorf.print_pos();
 
+	int portal_y = 10;
+
 	for (int i=0; i<5; i++)
 	{
 		portal.select_frame (i,0);
-		portal.set_position (-70 + i*120, 0);
+		portal.set_position (-70 + i*120, portal_y);
 		portal.draw (&iGraph);
 	};
 
-		portal.select_frame (light_portal,0);
-		portal.set_position (-70 + 5*120, 0);
+		portal.select_frame (save_state.get_phase()+5, 0);
+		portal.set_position (-70 + 5*120, portal_y);
 		portal.draw (&iGraph);
+
+	for (int i=0; i<6; i++)
+	{
+		if (save_state.get_temple(i))
+		{
+			medallion.select_frame (i, 0);
+			medallion.set_position (38 + i*120, 170);
+			medallion.draw (&iGraph);
+		};
+	};
 	
 	for (int i=0; i<6; i++)
-		if (1) //(save_state.get_easter_egg(i))
+		if (save_state.get_easter_egg(i))
 		{
 			prize_table.set_position (19 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 368); //Último x = 605
 			prize_table.draw (&iGraph);
@@ -54,7 +68,7 @@ void main_loop()
 			easter_egg.draw (&iGraph);
 		};
 
-	if (1) //(save_state.light())
+	if (save_state.light())
 	{
 		int i = 5;
 		prize_table.set_position (605, 308);
@@ -67,7 +81,6 @@ void main_loop()
 
 int main (void)
 {
-	light_portal = 5;
 	save_state.print_table();
 	
 	iGraph.CreateMainWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "A Lust for Power");
@@ -96,39 +109,31 @@ void cat_path (char* ptr, const char* sub_folder_path, const char* file_name)
 
 void KeyboardInput(int key, int state, int x, int y)
 {
-	if ((key == 'f') && (state == KEY_STATE_DOWN))
-		iGraph.SetFullscreen(true);
-
-	if ((key == KEY_RIGHT) && (state == KEY_STATE_DOWN))
-		Ganondorf.move (Ganondorf.get_current_speed(), horizontal);
-	if ((key == KEY_DOWN) && (state == KEY_STATE_DOWN))
-		Ganondorf.move (Ganondorf.get_current_speed(), vertical);
-	if ((key == KEY_LEFT) && (state == KEY_STATE_DOWN))
-		Ganondorf.move (-Ganondorf.get_current_speed(), horizontal);
-	if ((key == KEY_UP) && (state == KEY_STATE_DOWN))
-		Ganondorf.move (-Ganondorf.get_current_speed(), vertical);
-
-	if ((key == ' ' + KEY_RIGHT) && state==KEY_STATE_DOWN)
+	if (state == KEY_STATE_DOWN)
 	{
-		Ganondorf.move (4 * Ganondorf.get_current_speed(), horizontal);
-	}
-
-	if ((key == ' ') && (state == KEY_STATE_DOWN))
-	{
-		Ganondorf.toggle_dashing();
-	};
-
-
-	if ((key == 'p') && (state == KEY_STATE_DOWN))
-		switch (light_portal)
+		switch (key)
 		{
-			case 5: case 6: light_portal++; break;
-			case 7: light_portal = 5; break;
-		};
-	
+			case 'f': iGraph.SetFullscreen (true); break;
+			case (KEY_RIGHT): Ganondorf.move (Ganondorf.get_current_speed(), horizontal); break;
+			case (KEY_DOWN): Ganondorf.move (Ganondorf.get_current_speed(), vertical); break;
+			case (KEY_LEFT): Ganondorf.move (-Ganondorf.get_current_speed(), horizontal); break;
+			case (KEY_UP): Ganondorf.move (-Ganondorf.get_current_speed(), vertical); break;
+			case (' '): Ganondorf.toggle_dashing(); break;
+			case ('v'): exit(0); break;
 
-	if ((key == 'v') && (state == KEY_STATE_DOWN))
-		exit(0);
+			case ('t'): save_state.tweak_temple(0); break;
+			case ('y'): save_state.tweak_temple(1); break;
+			case ('u'): save_state.tweak_temple(2); break;
+			case ('i'): save_state.tweak_temple(3); break;
+			case ('o'): save_state.tweak_temple(4); break;
+			case ('p'): save_state.tweak_temple(5); break;
+		};
+
+		if (key>='5' && key<='9')
+			save_state.tweak_easter_egg (key-'5');
+		if (key=='0')
+			save_state.tweak_easter_egg (5);
+	};
 };
 
 void halt()
