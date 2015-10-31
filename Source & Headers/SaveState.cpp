@@ -16,10 +16,12 @@ void SaveState::load_file()
 	int size = 18;
 	file_good = false;
 	
-	char save_file_path[300];	// Pode aumentar o tamanho se precisar.
-	strcpy_s(save_file_path, PROJECT_PATH);
+	char save_file_path[FILE_PATH_SIZE];
+	cat_path (save_file_path, SH, "SaveFile.txt");
+	
+	/*strcpy_s(save_file_path, PROJECT_PATH);
 	strcat_s(save_file_path, SH);
-	strcat_s(save_file_path, "SaveFile.txt");
+	strcat_s(save_file_path, "SaveFile.txt");*/
 
 	fopen_s (&pFile, save_file_path , "r");
 	
