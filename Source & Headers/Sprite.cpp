@@ -41,6 +41,16 @@ void Sprite::set_frame_height (int h)
 	frame_height = h;
 };
 
+int Sprite::get_frame_width()
+{
+	return frame_width;
+};
+
+int Sprite::get_frame_height()
+{
+	return frame_height;
+};
+
 void Sprite::select_frame (int x, int y)
 {
 	sheet_x = x;
@@ -71,7 +81,7 @@ void Sprite::print_pos ()
 void Sprite::set_position (int x, int y)
 {
 	screen_x = x;
-	screen_y = y;
+	screen_y = y+frame_height;
 };
 
 void Sprite::draw(Graphics* g)
@@ -87,7 +97,7 @@ void Sprite::draw (iGraphics* i)
 	int cx = sheet_x * frame_width;
 	int cy = sheet_y * frame_height;
 
-	i->DrawIMG(screen_x, screen_y+frame_height, frame_width, frame_height, cx, cy, frame_width, frame_height, *this);
+	i->DrawIMG(screen_x, screen_y, frame_width, frame_height, cx, cy, frame_width, frame_height, *this);
 };
 
 void Sprite::move (int x, int y)

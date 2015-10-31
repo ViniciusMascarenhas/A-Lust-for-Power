@@ -37,6 +37,8 @@ class Sprite : public Image
 		void draw (iGraphics* i);
 		void set_frame_width (int w);
 		void set_frame_height (int h);
+		int get_frame_width();
+		int get_frame_height();
 		void select_frame (int x, int y);
 		void print_path();
 		void print_pos ();
