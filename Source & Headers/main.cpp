@@ -15,8 +15,8 @@ Sprite portal (270, 270);
 Sprite medallion (50, 50);
 Sprite prize_table (83, 46);
 Sprite easter_egg (49, 51);
-
 Sprite forest_map (TILE_SIZE, TILE_SIZE);
+bool see_generated_map = true;
 
 void load_images()
 {
@@ -85,13 +85,16 @@ void main_loop()
 	};
 
 
-	MapNode* current_node = map_builder.get_list_head()->get_ptr();
-	while (current_node != NULL)
+	if (see_generated_map)
 	{
-		forest_map.set_position (current_node->get_screen_x(), current_node->get_screen_y());
-		forest_map.select_frame (current_node->get_sheet_x(), current_node->get_sheet_y());
-		forest_map.draw (&iGraph);
-		current_node = current_node->get_ptr();
+		MapNode* current_node = map_builder.get_list_head()->get_ptr();
+		while (current_node != NULL)
+		{
+			forest_map.set_position (current_node->get_screen_x(), current_node->get_screen_y());
+			forest_map.select_frame (current_node->get_sheet_x(), current_node->get_sheet_y());
+			forest_map.draw (&iGraph);
+			current_node = current_node->get_ptr();
+		};
 	};
 };
 
@@ -110,7 +113,8 @@ int main (void)
 	}
 
 
-
+	map_builder.delete_list();
+	
 	halt();
 
 	return 0;
@@ -135,6 +139,7 @@ void KeyboardInput(int key, int state, int x, int y)
 			case (KEY_LEFT): Ganondorf.move (-Ganondorf.get_current_speed(), horizontal); break;
 			case (KEY_UP): Ganondorf.move (-Ganondorf.get_current_speed(), vertical); break;
 			case (' '): Ganondorf.toggle_dashing(); break;
+			case ('m'): see_generated_map = !see_generated_map; break;
 			case ('v'): exit(0); break;
 
 			case ('t'): save_state.tweak_temple(0); break;
