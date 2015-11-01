@@ -162,3 +162,7 @@ MapNode* MapBuilder::get_list_tail()
 	return map_list_tail;
 };
 
+void MapBuilder::delete_list()
+{
+	map_list_head->delete_ptr();
+};

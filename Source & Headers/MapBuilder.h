@@ -25,6 +25,7 @@ public:
 
 	MapNode* get_list_head();
 	MapNode* get_list_tail();
+	void delete_list();
 };
 
 #endif /* defined(__MapBuilder__) */
