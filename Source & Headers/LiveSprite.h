@@ -1,3 +1,6 @@
+#ifndef LiveSprite_H
+#define LiveSprite_H
+
 #include "Sprite.h"
 
 class LiveSprite : public Sprite
@@ -14,3 +17,5 @@ public:
 	bool is_dashing();
 	int get_current_speed();
 };
+
+#endif
