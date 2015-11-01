@@ -39,6 +39,10 @@ class Sprite : public Image
 		void set_frame_height (int h);
 		int get_frame_width();
 		int get_frame_height();
+		int get_cx();
+		int get_cy();
+		int get_x();
+		int get_y();
 		void select_frame (int x, int y);
 		void print_path();
 		void print_pos ();

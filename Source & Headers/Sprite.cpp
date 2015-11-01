@@ -51,6 +51,26 @@ int Sprite::get_frame_height()
 	return frame_height;
 };
 
+int Sprite::get_cx()
+{
+	return sheet_x * frame_width;
+};
+
+int Sprite::get_cy()
+{
+	return sheet_y * frame_height;
+};
+
+int Sprite::get_x()
+{
+	return screen_x;
+};
+
+int Sprite::get_y()
+{
+	return screen_y;
+};
+
 void Sprite::select_frame (int x, int y)
 {
 	sheet_x = x;
