@@ -1,5 +1,3 @@
-// 1.1
-
 #ifndef __SaveState__
 #define __SaveState__
 

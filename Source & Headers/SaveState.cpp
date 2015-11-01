@@ -1,4 +1,3 @@
-// 1.1
 #ifndef SaveStateCPP
 #define SaveStateCPP
 
@@ -15,7 +14,7 @@ SaveState::SaveState()
 void SaveState::load_file()
 {
 	FILE * pFile;
-	char mystring[100];
+	char line_buffer[100];
 	int size = 18;
 	file_good = false;
 	
@@ -33,11 +32,11 @@ void SaveState::load_file()
 	{
 		file_good = true;
 
-		if (fgets(mystring, size, pFile) != NULL)
+		if (fgets(line_buffer, size, pFile) != NULL)
 		{
 			for (int i = 0; i < 6; i++)
 			{
-				temples[i] = mystring[i] == '1' ? true : false;
+				temples[i] = line_buffer[i] == '1' ? true : false;
 			};
 		};
 
@@ -54,41 +53,41 @@ void SaveState::load_file()
 				phase=2;
 		};
 
-		printf ("Loading save file... Phase = %d\n\n", phase);
+		//printf ("Loading save file... Phase = %d\n\n", phase);
 		
-		if (fgets(mystring, size, pFile) != NULL)
+		if (fgets(line_buffer, size, pFile) != NULL)
 		{
 			for (int i = 0; i < 17; i++)
 			{
-				heart_container[i] = mystring[i] == '1' ? true : false;
+				heart_container[i] = line_buffer[i] == '1' ? true : false;
 			};
 		};
 	
-		fgets (mystring , size, pFile);
+		fgets (line_buffer , size, pFile);
 		
-		if (fgets (mystring , size , pFile) != NULL) hearts = atof(mystring);
+		if (fgets (line_buffer , size , pFile) != NULL) hearts = atof(line_buffer);
 		
-		if (fgets (mystring , size, pFile) != NULL) mp = atof(mystring);
+		if (fgets (line_buffer , size, pFile) != NULL) mp = atof(line_buffer);
 		
-		if (fgets (mystring , size, pFile) != NULL) max_mp = atof(mystring);
+		if (fgets (line_buffer , size, pFile) != NULL) max_mp = atof(line_buffer);
 
-		if (fgets(mystring, size, pFile) != NULL) max_stamina = atof(mystring);
+		if (fgets(line_buffer, size, pFile) != NULL) max_stamina = atof(line_buffer);
 
-		if (fgets (mystring , size, pFile) != NULL) rupees = atoi(mystring);
+		if (fgets (line_buffer , size, pFile) != NULL) rupees = atoi(line_buffer);
 
-		if (fgets(mystring, size, pFile) != NULL)
+		if (fgets(line_buffer, size, pFile) != NULL)
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				spell[i] = mystring[i] == '1' ? true : false;
+				spell[i] = line_buffer[i] == '1' ? true : false;
 			};
 		};
 
-		if (fgets(mystring, size, pFile) != NULL)
+		if (fgets(line_buffer, size, pFile) != NULL)
 		{
 			for (int i = 0; i < 7; i++)
 			{
-				easter_egg[i] = mystring[i] == '1' ? true : false;
+				easter_egg[i] = line_buffer[i] == '1' ? true : false;
 			};
 		};
 		
