@@ -1,10 +1,13 @@
 #ifndef __Main__
 #define __Main__
+
 #include "SaveState.h"
 #include "LiveSprite.h"
 #include "iGraphics.h"
+#include "MapBuilder.h"
 
 SaveState save_state;
+MapBuilder map_builder;
 iGraphics iGraph;
 Image Ganondorfs_castle;
 LiveSprite Ganondorf (40, 40, 1, 0, 80, 190);
@@ -12,6 +15,8 @@ Sprite portal (270, 270);
 Sprite medallion (50, 50);
 Sprite prize_table (83, 46);
 Sprite easter_egg (49, 51);
+
+Sprite forest_map (TILE_SIZE, TILE_SIZE);
 
 void load_images()
 {
@@ -27,6 +32,7 @@ void load_images()
 	medallion.load (CO, "Medallions.png");
 	prize_table.load (CS, "Prize Table.png");
 	easter_egg.load (CO, "Easter Eggs.png");
+	forest_map.load(TR, "Floresta 1.png");
 };
 
 void main_loop()
@@ -77,21 +83,31 @@ void main_loop()
 		easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 301);
 		easter_egg.draw (&iGraph);
 	};
+
+
+	MapNode* current_node = map_builder.get_list_head()->get_ptr();
+	while (current_node != NULL)
+	{
+		forest_map.set_position (current_node->get_screen_x(), current_node->get_screen_y());
+		forest_map.select_frame (current_node->get_sheet_x(), current_node->get_sheet_y());
+		forest_map.draw (&iGraph);
+		current_node = current_node->get_ptr();
+	};
 };
 
 int main (void)
 {
-	save_state.print_table();
+	//save_state.print_table();
 	
-	iGraph.CreateMainWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "A Lust for Power");
-	iGraph.SetKeyboardInput(KeyboardInput);
-	iGraph.SetBackgroundColor (26,32,40);
-
-	load_images();
-
-	iGraph.SetMainLoop(main_loop);
-	iGraph.StartMainLoop();
-
+	if(1)
+	{
+		iGraph.CreateMainWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "A Lust for Power");
+		iGraph.SetKeyboardInput(KeyboardInput);
+		iGraph.SetBackgroundColor (26,32,40);
+		load_images();
+		iGraph.SetMainLoop(main_loop);
+		iGraph.StartMainLoop();
+	}
 
 
 
