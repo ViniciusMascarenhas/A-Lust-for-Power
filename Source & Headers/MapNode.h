@@ -22,6 +22,7 @@ public:
 	int get_screen_y();
 	int get_sheet_x();
 	int get_sheet_y();
+	void delete_ptr();
 };
 
 #endif

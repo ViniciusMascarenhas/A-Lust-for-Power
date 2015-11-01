@@ -40,3 +40,12 @@ int MapNode::get_sheet_y()
 {
 	return sheet_y;
 };
+
+void MapNode::delete_ptr()
+{
+	if (ptr != NULL)
+	{
+		ptr->delete_ptr();
+		delete ptr;
+	}
+};
