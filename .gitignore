@@ -219,11 +219,9 @@ Source & Headers/freeglut_ext.h
 Source & Headers/freeglut_std.h
 Source & Headers/glu32.dll
 Source & Headers/glut.h
-Source & Headers/Medallions.png
 Source & Headers/opengl32.dll
 *.lib
 *.sln
-*.vcxproj
 *.filters
 Source & Headers/PlayLib_2010/Audio.h
 *.dll
@@ -233,6 +231,5 @@ Source & Headers/PlayLib_2010/freeglut_std.h
 Source & Headers/PlayLib_2010/glut.h
 Source & Headers/PlayLib_2010/Graphics.h
 
-Resources/Sprites/Chars/Raw/Ganondorf.png
 
 *.DS_Store
