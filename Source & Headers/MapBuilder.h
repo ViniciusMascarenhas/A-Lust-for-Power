@@ -21,7 +21,7 @@ public:
 	void Col		(int tx, int ty, int x, int y, int h);
 	void Sq			(int tx, int ty, int x, int y, int s);
 	void As_is		(int tx, int ty, int x, int y, int w, int h);
-	void Stretch	(int tx, int ty, int x, int y, int rx, int ry, int w, int h);
+	void St			(int tx, int ty, int x, int y, int w, int h);
 
 	MapNode* get_list_head();
 	MapNode* get_list_tail();

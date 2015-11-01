@@ -34,7 +34,7 @@ MapBuilder::MapBuilder()
 			
 			if (strcmp(argument_buffer[0], "Tile")==0)
 				arguments = 4;
-			else if (strcmp(argument_buffer[0], "Rect")==0 || strcmp(argument_buffer[0], "As_is")==0)
+			else if (strcmp(argument_buffer[0], "Rect")==0 || strcmp(argument_buffer[0], "As_is")==0 || strcmp(argument_buffer[0],"St")==0)
 				arguments = 6;
 			else if (strcmp(argument_buffer[0], "Row")==0 || strcmp(argument_buffer[0], "Col")==0)
 				arguments = 5;
@@ -68,6 +68,8 @@ MapBuilder::MapBuilder()
 				Col(atoi(argument_buffer[1]), atoi(argument_buffer[2]), atoi(argument_buffer[3]), atoi(argument_buffer[4]), atoi(argument_buffer[5]));
 			else if (strcmp(argument_buffer[0], "As_is")==0)
 				As_is(atoi(argument_buffer[1]), atoi(argument_buffer[2]), atoi(argument_buffer[3]), atoi(argument_buffer[4]), atoi(argument_buffer[5]), atoi(argument_buffer[6]));
+			else if (strcmp(argument_buffer[0], "St")==0)
+				St(atoi(argument_buffer[1]), atoi(argument_buffer[2]), atoi(argument_buffer[3]), atoi(argument_buffer[4]), atoi(argument_buffer[5]), atoi(argument_buffer[6]));
 			
 		};
 		
@@ -78,8 +80,6 @@ MapBuilder::MapBuilder()
 
 void MapBuilder::Tile (int tx, int ty, int x, int y)
 {
-	printf("Tile function called with arguments %d, %d, %d and %d.\n", tx, ty, x, y);
-
 	map_list_tail->new_ptr(tx, ty, x, y);
 	map_list_tail = map_list_tail->get_ptr();
 };
@@ -133,6 +133,22 @@ void MapBuilder::As_is (int tx, int ty, int x, int y, int w, int h)
 		};
 	};
 };
+
+void MapBuilder::St (int tx, int ty, int x, int y, int w, int h)
+{
+	//printf("\'St\' function called with arguments %d, %d, %d, %d, %d and %d.\n", tx, ty, x, y, w, h);
+
+	Tile (tx, ty, x, y);
+	Row (tx+1, ty, x+TILE_SIZE, y, w-2);
+	Tile (tx+2, ty, x+(w-2)*TILE_SIZE, y);
+	Col (tx, ty+1, x, y+TILE_SIZE, h-2);
+	Tile (tx, ty+2, x, y+(h-2)*TILE_SIZE);
+	Row (tx+1, ty+2, x+TILE_SIZE, y+(h-2)*TILE_SIZE, w-3);
+	Col (tx+2, ty+1, x+(w-2)*TILE_SIZE, y+TILE_SIZE, h-3);
+	Tile (tx+2, ty+2, x+(w-2)*TILE_SIZE, y+(h-2)*TILE_SIZE);
+	Rect (tx+1, ty+1, x+TILE_SIZE, y+TILE_SIZE, w-3, h-3);
+};
+
 
 MapNode* MapBuilder::get_list_head()
 {

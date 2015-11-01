@@ -2,8 +2,6 @@
 
 MapNode::MapNode (int cx, int cy, int x, int y)
 {
-	printf("MapNode constructor called with arguments %d, %d, %d and %d.\n", cx, cy, x, y);
-
 	sheet_x = cx;
 	sheet_y = cy;
 	screen_x = x;
@@ -20,7 +18,6 @@ void MapNode::set_ptr (MapNode* p)
 
 void MapNode::new_ptr (int tx, int ty, int x, int y)
 {
-	printf("MapNode::new_ptr funcion called with arguments %d, %d, %d and %d.\n", tx, ty, x, y);
 	ptr = new MapNode (tx, ty, x, y);
 };
 
