@@ -102,102 +102,11 @@ void Sprite::draw (iGraphics* i)
 
 void Sprite::move (int x, int y)
 {
-	static int last_step_right_leg = false;
-
 	screen_x += x;
 	screen_y += y;
-
-	if (x > 0)
-	{
-		if (sheet_y != 3)
-		{
-			sheet_x = 0;
-			sheet_y = 3;
-		};
-
-		if (sheet_y == 3)
-		{
-			if (sheet_x == 0)
-			{
-				if (last_step_right_leg)
-					sheet_x = 1;
-				else
-					sheet_x = 2;
-				last_step_right_leg = !last_step_right_leg;
-			}
-			else
-				sheet_x = 0;
-		};
-	}
-	else if (x < 0)
-	{
-		if (sheet_y != 1)
-		{
-			sheet_x = 0;
-			sheet_y = 1;
-		};
-
-		if (sheet_y == 1)
-		{
-			if (sheet_x == 0)
-			{
-				if (last_step_right_leg)
-					sheet_x = 1;
-				else
-					sheet_x = 2;
-				last_step_right_leg = !last_step_right_leg;
-			}
-			else
-				sheet_x = 0;
-		};
-	}
-	else if (y > 0)
-	{
-		if (sheet_y != 0)
-		{
-			sheet_x = 0;
-			sheet_y = 0;
-		};
-
-		if (sheet_y == 0)
-		{
-			if (sheet_x == 0)
-			{
-				if (last_step_right_leg)
-					sheet_x = 1;
-				else
-					sheet_x = 2;
-				last_step_right_leg = !last_step_right_leg;
-			}
-			else
-				sheet_x = 0;
-		}
-	}
-	else if (y < 0)
-	{
-		if (sheet_y != 2)
-		{
-			sheet_x = 0;
-			sheet_y = 2;
-		};
-
-		if (sheet_y == 2)
-		{
-			if (sheet_x == 0)
-			{
-				if (last_step_right_leg)
-					sheet_x = 1;
-				else
-					sheet_x = 2;
-				last_step_right_leg = !last_step_right_leg;
-			}
-			else
-				sheet_x = 0;
-		};
-	};
 };
 		
 void Sprite::move (int n, axis a)
 {
-	a == horizontal ? move(n,0) : move(0,n);
+	a == horizontal ? screen_x += n : screen_y += n;
 };

@@ -110,7 +110,7 @@ int main (void)
 		load_images();
 		iGraph.SetMainLoop(main_loop);
 		iGraph.StartMainLoop();
-	};
+	}
 
 
 	map_builder.delete_list();
