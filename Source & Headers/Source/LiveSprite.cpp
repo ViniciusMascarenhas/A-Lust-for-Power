@@ -2,8 +2,8 @@
 
 LiveSprite::LiveSprite (int w, int h, int sheet_X, int sheet_Y, int screen_X, int screen_Y)
 {
-	frame_width = w;
-	frame_height = h;
+	frame_w = w;
+	frame_h = h;
 	sheet_x = sheet_X;
 	sheet_y = sheet_Y;
 	screen_x = screen_X;

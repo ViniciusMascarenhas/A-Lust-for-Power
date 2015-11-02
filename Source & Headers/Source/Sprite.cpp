@@ -7,14 +7,14 @@ Sprite::Sprite()
 
 Sprite::Sprite (int w, int h)
 {
-	frame_width = w;
-	frame_height = h;
+	frame_w = w;
+	frame_h = h;
 };
 
 Sprite::Sprite (int w, int h, const char* p)
 {
-	frame_width = w;
-	frame_height = h;
+	frame_w = w;
+	frame_h = h;
 	int count = 0;
 
 	for (int i=0; p[i]!='\0'; i++)
@@ -23,50 +23,50 @@ Sprite::Sprite (int w, int h, const char* p)
 
 Sprite::Sprite (int w, int h, int sheet_X, int sheet_Y, int screen_X, int screen_Y)
 {
-	frame_width = w;
-	frame_height = h;
+	frame_w = w;
+	frame_h = h;
 	sheet_x = sheet_X;
 	sheet_y = sheet_Y;
 	screen_x = screen_X;
 	screen_y = screen_Y;
 };
 
-void Sprite::set_frame_width (int w)
+void Sprite::set_frame_w (int w)
 {
-	frame_width = w;
+	frame_w = w;
 };
 
-void Sprite::set_frame_height (int h)
+void Sprite::set_frame_h (int h)
 {
-	frame_height = h;
+	frame_h = h;
 };
 
-int Sprite::get_frame_width()
+int Sprite::get_frame_w()
 {
-	return frame_width;
+	return frame_w;
 };
 
-int Sprite::get_frame_height()
+int Sprite::get_frame_h()
 {
-	return frame_height;
+	return frame_h;
 };
 
-int Sprite::get_cx()
+int Sprite::get_crop_x()
 {
-	return sheet_x * frame_width;
+	return sheet_x * frame_w;
 };
 
-int Sprite::get_cy()
+int Sprite::get_crop_y()
 {
-	return sheet_y * frame_height;
+	return sheet_y * frame_h;
 };
 
-int Sprite::get_x()
+int Sprite::get_screen_x()
 {
 	return screen_x;
 };
 
-int Sprite::get_y()
+int Sprite::get_screen_y()
 {
 	return screen_y;
 };
@@ -95,29 +95,29 @@ void Sprite::print_path()
 
 void Sprite::print_pos ()
 {
-	printf ("(sheet_x = %d , sheet_y = %d , screen_x = %d , screen_y = %d , w = %d , h = %d)\n", sheet_x, sheet_y, screen_x, screen_y, frame_width, frame_height);
+	printf ("(sheet_x = %d , sheet_y = %d , screen_x = %d , screen_y = %d , w = %d , h = %d)\n", sheet_x, sheet_y, screen_x, screen_y, frame_w, frame_h);
 };
 
 void Sprite::set_position (int x, int y)
 {
 	screen_x = x;
-	screen_y = y+frame_height;
+	screen_y = y;
 };
 
 void Sprite::draw(Graphics* g)
 {
-	int cx = sheet_x * frame_width;
-	int cy = sheet_y * frame_height;
+	int cx = sheet_x * frame_w;
+	int cy = sheet_y * frame_h;
 
-	g->DrawImage2D(screen_x, screen_y, frame_width, frame_height, cx, cy, frame_width, frame_height, *this);
+	g->DrawImage2D(screen_x, screen_y, frame_w, frame_h, cx, cy, frame_w, frame_h, *this);
 };
 
 void Sprite::draw (iGraphics* i)
 {
-	int cx = sheet_x * frame_width;
-	int cy = sheet_y * frame_height;
+	int cx = sheet_x * frame_w;
+	int cy = sheet_y * frame_h;
 
-	i->DrawIMG(screen_x, screen_y, frame_width, frame_height, cx, cy, frame_width, frame_height, *this);
+	i->DrawIMG(screen_x, screen_y, frame_w, frame_h, cx, cy, frame_w, frame_h, *this);
 };
 
 void Sprite::move (int x, int y)

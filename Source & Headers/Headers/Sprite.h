@@ -21,8 +21,8 @@ class Sprite : public Image
 		int screen_y;
 		int sheet_x;
 		int sheet_y;
-		int frame_width;
-		int frame_height;
+		int frame_w;
+		int frame_h;
 		char path[FILE_PATH_SIZE];
 
 	public:
@@ -35,14 +35,14 @@ class Sprite : public Image
 		void set_position (int x, int y);
 		void draw (Graphics* g);
 		void draw (iGraphics* i);
-		void set_frame_width (int w);
-		void set_frame_height (int h);
-		int get_frame_width();
-		int get_frame_height();
-		int get_cx();
-		int get_cy();
-		int get_x();
-		int get_y();
+		void set_frame_w (int w);
+		void set_frame_h (int h);
+		int get_frame_w();
+		int get_frame_h();
+		int get_crop_x();
+		int get_crop_y();
+		int get_screen_x();
+		int get_screen_y();
 		void select_frame (int x, int y);
 		void print_path();
 		void print_pos ();

@@ -24,6 +24,7 @@
     <ClInclude Include="Headers\SaveState.h" />
     <ClInclude Include="Headers\Sprite.h" />
     <ClInclude Include="Headers\MapBuilder.h" />
+    <ClInclude Include="Headers\SpriteNode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="etc\bass.dll" />
@@ -45,6 +46,7 @@
     <ClCompile Include="Source\SaveState.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\MapBuilder.cpp" />
+    <ClCompile Include="Source\SpriteNode.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BF2F8F6C-2458-4682-AEC9-813F7B77C698}</ProjectGuid>

@@ -7,53 +7,53 @@ using namespace PlayLib;
 
 class SaveState
 {
-private:
-	bool file_good;
+	private:
+		bool file_good;
 
-	bool temples [6];
-	float hearts;
-	bool heart_container [17];
-	float mp;
-	float max_mp;
-	float max_stamina;
-	int rupees;
-	bool spell[3];
-	bool easter_egg[7];
-	int phase;
+		bool temples [6];
+		float hearts;
+		bool heart_container [17];
+		float mp;
+		float max_mp;
+		float max_stamina;
+		int rupees;
+		bool spell[3];
+		bool easter_egg[7];
+		int phase;
 	
-public:
+	public:
 	
-	SaveState ();
+		SaveState ();
 	
-	//void save_file();
-	void load_file();
+		//void save_file();
+		void load_file();
 	
-	bool get_temple(int t);
-	float get_hearts();
-	int get_heart_containers();
-	float get_mp();
-	float get_max_mp();
-	int get_rupees();
-	float get_max_stamina();
+		bool get_temple(int t);
+		float get_hearts();
+		int get_heart_containers();
+		float get_mp();
+		float get_max_mp();
+		int get_rupees();
+		float get_max_stamina();
 
-	int get_phase();
-	void tweak_phase();
+		int get_phase();
+		void tweak_phase();
 	
-	bool forest();
-	bool fire();
-	bool water();
-	bool spirit();
-	bool shadow();
-	bool light();
-	void tweak_temple (int i);
+		bool forest();
+		bool fire();
+		bool water();
+		bool spirit();
+		bool shadow();
+		bool light();
+		void tweak_temple (int i);
 
-	void set_easter_egg (int i, bool b);
-	bool get_easter_egg (int i);
-	void tweak_easter_egg (int i);
+		void set_easter_egg (int i, bool b);
+		bool get_easter_egg (int i);
+		void tweak_easter_egg (int i);
 
-	void print_report();
-	void print_table();
-	void graphics_print_table (Graphics g);
+		void print_report();
+		void print_table();
+		void graphics_print_table (Graphics g);
 };
 
 #endif /* defined(__SaveState__) */

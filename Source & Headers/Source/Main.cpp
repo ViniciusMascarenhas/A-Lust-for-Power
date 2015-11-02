@@ -5,6 +5,7 @@
 #include "LiveSprite.h"
 #include "iGraphics.h"
 #include "MapBuilder.h"
+#include "SpriteNode.h"
 
 SaveState save_state;
 MapBuilder map_builder;
@@ -16,7 +17,10 @@ Sprite medallion (50, 50);
 Sprite prize_table (83, 46);
 Sprite easter_egg (49, 51);
 Sprite forest_map (TILE_SIZE, TILE_SIZE);
-bool see_generated_map = true;
+Sprite Epona (48, 31);
+SpriteNode sprite_list_head;
+
+bool see_generated_map = false;
 
 void load_images()
 {
@@ -27,61 +31,74 @@ void load_images()
 	
 	Ganondorf.load (CO, "Ganondorf.png");
 	Ganondorf.select_frame (0, 2);
-	Ganondorf.set_position ((SCREEN_WIDTH - Ganondorf.get_frame_width()) / 2 - 8, 345);
+	Ganondorf.set_position ((SCREEN_WIDTH - Ganondorf.get_frame_w()) / 2 - 8, 345);
 	portal.load (CO, "Portals.png");
 	medallion.load (CO, "Medallions.png");
 	prize_table.load (CS, "Prize Table.png");
 	easter_egg.load (CO, "Easter Eggs.png");
 	forest_map.load(TR, "Floresta 1.png");
+	
+	Epona.load (CO, "Epona.png");
+	Epona.set_position (160, 200);
+	Epona.select_frame (1, 0);
+	printf("%d\n",Epona.get_screen_y());
+	
 };
 
 void main_loop()
 {
 	iGraph.DrawImage2D (0,0,736,448,0,0,736,448,Ganondorfs_castle);
-	Ganondorf.draw (&iGraph);
+	//Ganondorf.draw (&iGraph);
 	//Ganondorf.print_pos();
+	sprite_list_head.insert_node (&Ganondorf, 1);
 
-	int portal_y = 10;
+	int portal_y = 280;
 
 	for (int i=0; i<5; i++)
 	{
 		portal.select_frame (i,0);
 		portal.set_position (-70 + i*120, portal_y);
-		portal.draw (&iGraph);
+		//portal.draw (&iGraph);
+		sprite_list_head.insert_node (&portal, 1);
 	};
 
 		portal.select_frame (save_state.get_phase()+5, 0);
 		portal.set_position (-70 + 5*120, portal_y);
-		portal.draw (&iGraph);
+		//portal.draw (&iGraph);
+		sprite_list_head.insert_node (&portal, 1);
 
 	for (int i=0; i<6; i++)
 	{
 		if (save_state.get_temple(i))
 		{
 			medallion.select_frame (i, 0);
-			medallion.set_position (38 + i*120, 170);
-			medallion.draw (&iGraph);
+			medallion.set_position (38 + i*120, 220);
+			//medallion.draw (&iGraph);
+			sprite_list_head.insert_node (&medallion, 1);
 		};
 	};
 	
 	for (int i=0; i<6; i++)
 		if (save_state.get_easter_egg(i))
 		{
-			prize_table.set_position (19 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 368); //Último x = 605
-			prize_table.draw (&iGraph);
+			prize_table.set_position (19 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 414); //Último x = 605
+			//prize_table.draw (&iGraph);
+			sprite_list_head.insert_node (&prize_table, 1);
 			easter_egg.select_frame (i, 0);
-			easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 361);
-			easter_egg.draw (&iGraph);
+			easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 412);
+			//easter_egg.draw (&iGraph);
+			sprite_list_head.insert_node (&easter_egg, 2);
 		};
 
 	if (save_state.light())
 	{
 		int i = 5;
-		prize_table.set_position (605, 308);
+		prize_table.set_position (605, 354);
 		prize_table.draw (&iGraph);
 		easter_egg.select_frame (i+1, 0);
-		easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 301);
-		easter_egg.draw (&iGraph);
+		easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 352);
+		//easter_egg.draw (&iGraph);
+		sprite_list_head.insert_node (&easter_egg, 2);
 	};
 
 
@@ -96,12 +113,27 @@ void main_loop()
 			current_node = current_node->get_ptr();
 		};
 	};
+
+
+
+	//Epona.draw (&iGraph);
+	//Epona.set_position ((SCREEN_WIDTH - Epona.get_frame_w()) / 2 - 12, 345);
+	sprite_list_head.insert_node (&Epona, 1);
+
+
+	
+	
+
+	sprite_list_head.draw_list (&iGraph);
+	sprite_list_head.clear();
 };
 
 int main (void)
 {
-	save_state.print_table();
-	
+	//save_state.print_table();
+	//sprite_list_head
+	//sprite_list_head.insert_node (&Epona, 2);
+	sprite_list_head.print_node();
 	if(1)
 	{
 		iGraph.CreateMainWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "A Lust for Power");
