@@ -11,40 +11,40 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="Defines.h" />
-    <ClInclude Include="freeglut.h" />
-    <ClInclude Include="freeglut_ext.h" />
-    <ClInclude Include="freeglut_std.h" />
-    <ClInclude Include="glut.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="iGraphics.h" />
-    <ClInclude Include="LiveSprite.h" />
-    <ClInclude Include="MapNode.h" />
-    <ClInclude Include="SaveState.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="MapBuilder.h" />
+    <ClInclude Include="etc\Audio.h" />
+    <ClInclude Include="Headers\Defines.h" />
+    <ClInclude Include="etc\freeglut.h" />
+    <ClInclude Include="etc\freeglut_ext.h" />
+    <ClInclude Include="etc\freeglut_std.h" />
+    <ClInclude Include="etc\glut.h" />
+    <ClInclude Include="etc\Graphics.h" />
+    <ClInclude Include="Headers\iGraphics.h" />
+    <ClInclude Include="Headers\LiveSprite.h" />
+    <ClInclude Include="Headers\MapNode.h" />
+    <ClInclude Include="Headers\SaveState.h" />
+    <ClInclude Include="Headers\Sprite.h" />
+    <ClInclude Include="Headers\MapBuilder.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bass.dll" />
+    <None Include="etc\bass.dll" />
     <None Include="freeglut.dll" />
-    <None Include="glu32.dll" />
-    <None Include="MapFileBG.txt" />
-    <None Include="opengl32.dll" />
-    <None Include="SaveFile.txt" />
+    <None Include="etc\glu32.dll" />
+    <None Include="Files\MapFileBG.txt" />
+    <None Include="etc\opengl32.dll" />
+    <None Include="Files\SaveFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="PlayLib.lib" />
     <Library Include="PlayLibd.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="iGraphics.cpp" />
-    <ClCompile Include="LiveSprite.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MapNode.cpp" />
-    <ClCompile Include="SaveState.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="MapBuilder.cpp" />
+    <ClCompile Include="Source\iGraphics.cpp" />
+    <ClCompile Include="Source\LiveSprite.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\MapNode.cpp" />
+    <ClCompile Include="Source\SaveState.cpp" />
+    <ClCompile Include="Source\Sprite.cpp" />
+    <ClCompile Include="Source\MapBuilder.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BF2F8F6C-2458-4682-AEC9-813F7B77C698}</ProjectGuid>
@@ -86,6 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>\\Mac\Home\Projects\A-Lust-for-Power\Source &amp; Headers\Headers;\\Mac\Home\Projects\A-Lust-for-Power\Source &amp; Headers\etc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

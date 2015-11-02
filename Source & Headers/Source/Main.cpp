@@ -100,7 +100,7 @@ void main_loop()
 
 int main (void)
 {
-	//save_state.print_table();
+	save_state.print_table();
 	
 	if(1)
 	{

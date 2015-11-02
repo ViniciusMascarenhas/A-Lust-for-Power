@@ -1,4 +1,4 @@
-#include "iGraphics.h"
+#include "..\\Headers\\iGraphics.h"
 
 void iGraphics::DrawIMG (Image i)
 {

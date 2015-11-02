@@ -19,7 +19,7 @@ void SaveState::load_file()
 	file_good = false;
 	
 	char save_file_path[FILE_PATH_SIZE];
-	cat_path (save_file_path, SH, "SaveFile.txt");
+	cat_path (save_file_path, SH, "Files/SaveFile.txt");
 	
 	/*strcpy_s(save_file_path, PROJECT_PATH);
 	strcat_s(save_file_path, SH);
