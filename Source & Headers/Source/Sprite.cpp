@@ -221,3 +221,8 @@ void Sprite::move (int n, axis a)
 {
 	a == horizontal ? move(n,0) : move(0,n);
 };
+
+char* Sprite::get_path()
+{
+	return path;
+};

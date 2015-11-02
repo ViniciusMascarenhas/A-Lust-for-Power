@@ -48,6 +48,7 @@ class Sprite : public Image
 		void print_pos ();
 		void move (int x, int y);
 		void move (int n, axis a);
+		char* get_path();
 };
 
 #endif

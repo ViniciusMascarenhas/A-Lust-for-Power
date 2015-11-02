@@ -125,15 +125,14 @@ void main_loop()
 	
 
 	sprite_list_head.draw_list (&iGraph);
+	sprite_list_head.print_node_line();
 	sprite_list_head.clear();
 };
 
 int main (void)
 {
 	//save_state.print_table();
-	//sprite_list_head
-	//sprite_list_head.insert_node (&Epona, 2);
-	sprite_list_head.print_node();
+	
 	if(1)
 	{
 		iGraph.CreateMainWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "A Lust for Power");

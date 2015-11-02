@@ -48,6 +48,8 @@ class SpriteNode
 		void draw (iGraphics* i);
 
 		void print_node();
+		void print_sprite_file_name();
+		void print_node_line();
 };
 
 

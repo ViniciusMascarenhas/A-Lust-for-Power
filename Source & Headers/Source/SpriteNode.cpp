@@ -182,3 +182,51 @@ void SpriteNode::print_node()
 	else
 		printf ("[tail]\n\n");
 };
+
+void SpriteNode::print_sprite_file_name()
+{
+	printf ("%s", sprite->get_path());
+};
+
+void SpriteNode::print_node_line()
+{
+	if (layer == -1)
+	{
+		printf ("[head]\n");
+	}
+	else
+	{
+		int last_backslash = 0;
+		int explorer = 0;
+		int buffer_i = 0;
+		char buffer [40]; // Arbitrário
+
+		for (;;)
+		{
+			explorer++;
+			if (sprite->get_path()[explorer] == '\\')
+			{
+				last_backslash = explorer;
+				continue;
+			}
+			else if (sprite->get_path()[explorer] == '\0')
+			{
+				break;
+			};
+		};
+
+		for (int sprite_i = last_backslash+1; sprite->get_path()[sprite_i] != '\0'; sprite_i++, buffer_i++)
+		{
+			buffer[buffer_i] = sprite->get_path()[sprite_i];
+		};
+		buffer[buffer_i] = '\0';
+
+
+		printf ("[%s] @ Layer %d | %d, %d | %d, %d]\n", buffer, layer, screen_x, screen_y, frame_w, frame_h);
+	};
+
+	if (ptr != NULL)
+		ptr->print_node_line();
+	else
+		printf ("[tail]\n\n");
+};
