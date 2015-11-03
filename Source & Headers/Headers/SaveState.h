@@ -54,6 +54,8 @@ class SaveState
 		void alter_hearts (float h);
 		void set_hearts (float h);
 
+		void alter_rupees (int r);
+
 		void print_report();
 		void print_table();
 		void graphics_print_table (Graphics g);

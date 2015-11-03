@@ -300,6 +300,15 @@ void SaveState::set_hearts (float h)
 	hearts = h;
 };
 
+void SaveState::alter_rupees (int r)
+{
+	if (rupees+r >= 0 && rupees+r <= MAX_RUPEES)
+		rupees += r;
+	else if (rupees+r < 0)
+		rupees = 0;
+	else if (rupees+r > MAX_RUPEES)
+		rupees = MAX_RUPEES;
+};
 
 
 #endif

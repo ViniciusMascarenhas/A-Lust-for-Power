@@ -19,6 +19,7 @@ Sprite easter_egg (83, 58); //49, 51
 Sprite forest_map (TILE_SIZE, TILE_SIZE);
 Sprite Epona (48, 31);
 Sprite heart (22, 19);
+Sprite rupee (21, 24);
 
 SpriteNode sprite_list_head;
 
@@ -39,12 +40,11 @@ void load_images()
 	easter_egg.load (CO, "Easter_Eggs.png");
 	forest_map.load(TR, "Floresta 1.png");
 	heart.load (CO, "Heart.png");
+	rupee.load (CO, "Rupee copy.png");
 
 	Epona.load (CO, "Epona.png");
 	Epona.set_position (360, 230);
 	Epona.select_frame (1, 0);
-	printf("%d\n",Epona.get_screen_y());
-	
 };
 
 void main_loop()
@@ -151,52 +151,43 @@ void main_loop()
 
 	for (int i=0; i<20; i++)
 	{
-		if (i < 10)
-			heart.set_position (22*i + 20, 20);
-		else
-			heart.set_position (22*(i-10) + 20, 40);
-
+		if (i < 10)				heart.set_position (22*i + 20, 20);
+		else					heart.set_position (22*(i-10) + 20, 40);
 		
-		if (i < whole_hearts)
-		{
-			heart.select_frame (0, 0);
-		}
+
+		if (i < whole_hearts)				heart.select_frame (0, 0);
 		else if (i == whole_hearts)
 		{
-			if (fraction == 0.0f)
-			{
-				heart.select_frame (4, 0);
-			}
-			else if (fraction == 0.25f)
-			{
-				heart.select_frame (3, 0);
-			}
-			else if (fraction == 0.50f)
-			{
-				heart.select_frame (2, 0);
-			}
-			else if (fraction == 0.75f)
-			{
-				heart.select_frame (1, 0);
-			};
-
+			if (fraction == 0.0f)			heart.select_frame (4, 0);
+			else if (fraction == 0.25f)		heart.select_frame (3, 0);
+			else if (fraction == 0.50f)		heart.select_frame (2, 0);
+			else if (fraction == 0.75f)		heart.select_frame (1, 0);
 		}
-		else if (i > whole_hearts)
-		{
-			heart.select_frame (4, 0);
-		};
-
+		else if (i > whole_hearts)			heart.select_frame (4, 0);
+	
 		if (i+1 <= save_state.get_heart_containers())
 			sprite_list_head.insert_node (&heart, 10);
 	};
 
 
+	int total_rupees = save_state.get_rupees();
+	int single_digit_rupees = 0;
+	char rupee_str[4];
+	for (int i=0; i<3; i++)
+	{
+		int divisor = pow ((double) 10, (int) 2-i);
+		single_digit_rupees = total_rupees / divisor;
+		rupee_str[i] = '0' + single_digit_rupees;
+		total_rupees -= single_digit_rupees * divisor;
+	};
+	rupee_str[3] = '\0';
+	rupee.set_position (20, SCREEN_HEIGHT - 10);
+	sprite_list_head.insert_node (&rupee, 10);
+	iGraph.SetTextFont ("Helvetica", 25, 10, 0, 0);
+	iGraph.draw_text (45, SCREEN_HEIGHT - 13, rupee_str);
 
-	//heart.set_position (22*(i-10) + 20, 40);
-	//heart.select_frame (0, 0);
-	//sprite_list_head.insert_node (&heart, 10);
-	
-	
+
+
 
 	//iGraph.draw_point (SCREEN_WIDTH/2, 280);
 	
@@ -250,7 +241,6 @@ void KeyboardInput(int key, int state, int x, int y)
 	{
 		switch (key)
 		{
-			case 'f': iGraph.SetFullscreen (true); break;
 			case (KEY_RIGHT): Ganondorf.move (Ganondorf.get_current_speed(), horizontal); break;
 			case (KEY_DOWN): Ganondorf.move (Ganondorf.get_current_speed(), vertical); break;
 			case (KEY_LEFT): Ganondorf.move (-Ganondorf.get_current_speed(), horizontal); break;
@@ -265,6 +255,14 @@ void KeyboardInput(int key, int state, int x, int y)
 			case ('i'): save_state.tweak_temple(3); break;
 			case ('o'): save_state.tweak_temple(4); break;
 			case ('p'): save_state.tweak_temple(5); break;
+
+			case ('f'): save_state.alter_rupees(-100); break;
+			case ('g'): save_state.alter_rupees(-10); break;
+			case ('h'): save_state.alter_rupees(-1); break;
+			case ('j'): save_state.alter_rupees(1); break;
+			case ('k'): save_state.alter_rupees(10); break;
+			case ('l'): save_state.alter_rupees(100); break;
+
 
 			case ('b'): save_state.alter_hearts (-0.25f); break;
 			case ('n'): save_state.alter_hearts (0.25f); break;
