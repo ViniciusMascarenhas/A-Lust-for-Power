@@ -14,10 +14,11 @@ Image Ganondorfs_castle;
 LiveSprite Ganondorf (40, 40, 1, 0, 80, 190);
 Sprite portal (270, 270);
 Sprite medallion (50, 50);
-Sprite prize_table (83, 46);
-Sprite easter_egg (49, 51);
+Sprite easter_egg (83, 58); //49, 51
 Sprite forest_map (TILE_SIZE, TILE_SIZE);
 Sprite Epona (48, 31);
+Sprite heart (22, 19);
+
 SpriteNode sprite_list_head;
 
 bool see_generated_map = false;
@@ -34,10 +35,10 @@ void load_images()
 	Ganondorf.set_position ((SCREEN_WIDTH - Ganondorf.get_frame_w()) / 2 - 8, 345);
 	portal.load (CO, "Portals.png");
 	medallion.load (CO, "Medallions.png");
-	prize_table.load (CS, "Prize Table.png");
-	easter_egg.load (CO, "Easter Eggs.png");
+	easter_egg.load (CO, "Easter_Eggs.png");
 	forest_map.load(TR, "Floresta 1.png");
-	
+	heart.load (CO, "Heart.png");
+
 	Epona.load (CO, "Epona.png");
 	Epona.set_position (160, 200);
 	Epona.select_frame (1, 0);
@@ -50,7 +51,7 @@ void main_loop()
 	iGraph.DrawImage2D (0,0,736,448,0,0,736,448,Ganondorfs_castle);
 	//Ganondorf.draw (&iGraph);
 	//Ganondorf.print_pos();
-	sprite_list_head.insert_node (&Ganondorf, 1);
+	sprite_list_head.insert_node (&Ganondorf, 5);
 
 	int portal_y = 280;
 
@@ -59,13 +60,13 @@ void main_loop()
 		portal.select_frame (i,0);
 		portal.set_position (-70 + i*120, portal_y);
 		//portal.draw (&iGraph);
-		sprite_list_head.insert_node (&portal, 1);
+		sprite_list_head.insert_node (&portal, 5);
 	};
 
 		portal.select_frame (save_state.get_phase()+5, 0);
 		portal.set_position (-70 + 5*120, portal_y);
 		//portal.draw (&iGraph);
-		sprite_list_head.insert_node (&portal, 1);
+		sprite_list_head.insert_node (&portal, 5);
 
 	for (int i=0; i<6; i++)
 	{
@@ -77,29 +78,27 @@ void main_loop()
 			sprite_list_head.insert_node (&medallion, 1);
 		};
 	};
-	
+
 	for (int i=0; i<6; i++)
 		if (save_state.get_easter_egg(i))
 		{
-			prize_table.set_position (19 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 414); //Último x = 605
-			//prize_table.draw (&iGraph);
-			sprite_list_head.insert_node (&prize_table, 1);
 			easter_egg.select_frame (i, 0);
-			easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 412);
-			//easter_egg.draw (&iGraph);
-			sprite_list_head.insert_node (&easter_egg, 2);
+			easter_egg.set_position (19 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 414); //Último x = 605
+			//prize_table.draw (&iGraph);
+			sprite_list_head.insert_node (&easter_egg, 5);
 		};
 
 	if (save_state.light())
 	{
 		int i = 5;
-		prize_table.set_position (605, 354);
-		prize_table.draw (&iGraph);
+		//easter_egg.set_position (605, 354);
+		//sprite_list_head.insert_node (&easter_egg, 5);
 		easter_egg.select_frame (i+1, 0);
-		easter_egg.set_position (34 + (SCREEN_WIDTH / 2) - ((3-i) * 109) - (30 * (3-i>0)), 352);
-		//easter_egg.draw (&iGraph);
-		sprite_list_head.insert_node (&easter_egg, 2);
+		easter_egg.set_position (605, 352);
+		sprite_list_head.insert_node (&easter_egg, 5);
 	};
+
+
 
 
 	if (see_generated_map)
@@ -118,11 +117,20 @@ void main_loop()
 
 	//Epona.draw (&iGraph);
 	//Epona.set_position ((SCREEN_WIDTH - Epona.get_frame_w()) / 2 - 12, 345);
-	sprite_list_head.insert_node (&Epona, 1);
+	sprite_list_head.insert_node (&Epona, 5);
 
 
+	for (int i=0; i<3; i++)
+	{
+		heart.set_position (28*i + 20, 20);
+		heart.select_frame (0, 0);
+		sprite_list_head.insert_node (&heart, 10);
+	};
 	
+
+	iGraph.draw_point (SCREEN_WIDTH/2, 280);
 	
+
 
 	sprite_list_head.draw_list (&iGraph);
 	sprite_list_head.print_node_line();

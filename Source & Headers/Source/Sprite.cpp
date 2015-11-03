@@ -104,12 +104,12 @@ void Sprite::set_position (int x, int y)
 	screen_y = y;
 };
 
-void Sprite::draw(Graphics* g)
+void Sprite::draw (Graphics* g)
 {
 	int cx = sheet_x * frame_w;
 	int cy = sheet_y * frame_h;
 
-	g->DrawImage2D(screen_x, screen_y, frame_w, frame_h, cx, cy, frame_w, frame_h, *this);
+	g->DrawImage2D (screen_x, screen_y, frame_w, frame_h, cx, cy, frame_w, frame_h, *this);
 };
 
 void Sprite::draw (iGraphics* i)
@@ -117,7 +117,7 @@ void Sprite::draw (iGraphics* i)
 	int cx = sheet_x * frame_w;
 	int cy = sheet_y * frame_h;
 
-	i->DrawIMG(screen_x, screen_y, frame_w, frame_h, cx, cy, frame_w, frame_h, *this);
+	i->draw_image (screen_x, screen_y, frame_w, frame_h, cx, cy, frame_w, frame_h, *this);
 };
 
 void Sprite::move (int x, int y)
