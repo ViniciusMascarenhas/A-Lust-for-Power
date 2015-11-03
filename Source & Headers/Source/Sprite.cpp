@@ -71,6 +71,16 @@ int Sprite::get_screen_y()
 	return screen_y;
 };
 
+int Sprite::get_sheet_x()
+{
+	return sheet_x;
+};
+
+int Sprite::get_sheet_y()
+{
+	return sheet_y;
+};
+
 void Sprite::select_frame (int x, int y)
 {
 	sheet_x = x;

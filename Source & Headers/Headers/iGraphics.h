@@ -1,7 +1,8 @@
 #ifndef __iGraphics__
 #define __iGraphics__
 #include "Graphics.h"
-#include "Defines.h"
+#include "Defines.h" // Só precisa ter #define SCREEN_HEIGHT número
+// (Ou esse #define pode estar aqui mesmo, sem #incluir o "Defines.h".)
 
 class iGraphics : public Graphics
 {

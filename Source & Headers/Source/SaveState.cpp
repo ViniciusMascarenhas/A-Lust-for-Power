@@ -285,6 +285,21 @@ void SaveState::graphics_print_table (Graphics g) // Corrigir todas as tabulaçõe
 	};
 };
 
+void SaveState::alter_hearts (float h)
+{
+	if (hearts + h >= get_heart_containers())
+		hearts = get_heart_containers();
+	else if (hearts + h <= 0.0f)
+		hearts = 0.0f;
+	else
+		hearts += h;
+};
+
+void SaveState::set_hearts (float h)
+{
+	hearts = h;
+};
+
 
 
 #endif

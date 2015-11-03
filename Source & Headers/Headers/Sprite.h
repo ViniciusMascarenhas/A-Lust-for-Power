@@ -43,6 +43,8 @@ class Sprite : public Image
 		int get_crop_y();
 		int get_screen_x();
 		int get_screen_y();
+		int get_sheet_x();
+		int get_sheet_y();
 		void select_frame (int x, int y);
 		void print_path();
 		void print_pos ();

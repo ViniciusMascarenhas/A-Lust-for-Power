@@ -111,13 +111,16 @@ void SpriteNode::set_sprite (Sprite* s)
 
 void SpriteNode::insert_node (Sprite* s, int l)
 {
+	int s_y = s->get_screen_y() - s->get_frame_h()/2;
+	int y = screen_y - frame_h/2;
+			
 	if (s == NULL)
 	{
 		printf ("Tried to insert a null sprite pointer to the list.\n");
 		return;
 	};
 
-	if ((l > layer) || (l == layer) && (s->get_screen_y() >= screen_y))
+	if ((l > layer) || (l == layer) && (s_y >= y))
 	{
 		if (ptr == NULL)
 		{
@@ -125,7 +128,9 @@ void SpriteNode::insert_node (Sprite* s, int l)
 		}
 		else
 		{
-			if ((l > ptr->get_layer()) || (l == ptr->get_layer()) && (s->get_screen_y() >= ptr->get_screen_y()))
+			int p_y = ptr->get_screen_y() - ptr->get_frame_h()/2;
+
+			if ((l > ptr->get_layer()) || (l == ptr->get_layer()) && (s_y >= p_y))
 			{
 				ptr->insert_node (s, l);
 			}
@@ -174,7 +179,7 @@ void SpriteNode::print_node()
 	if (layer == -1)
 		printf ("[L | x, y | w, h]\n[head] -> ");
 	else
-		printf ("[%d | %d, %d | %d, %d] -> ", layer, screen_x, screen_y, frame_w, frame_h);
+		printf ("[%d | %d, %d | %d, %d] -> ", layer, screen_x, screen_y+frame_h/2, frame_w, frame_h);
 
 
 	if (ptr != NULL)
@@ -222,7 +227,7 @@ void SpriteNode::print_node_line()
 		buffer[buffer_i] = '\0';
 
 
-		printf ("[%s] @ Layer %d | %d, %d | %d, %d]\n", buffer, layer, screen_x, screen_y, frame_w, frame_h);
+		printf ("[%s] @ Layer %d | %d, %d | %d, %d]\n", buffer, layer, screen_x, screen_y-frame_h/2, frame_w, frame_h);
 	};
 
 	if (ptr != NULL)

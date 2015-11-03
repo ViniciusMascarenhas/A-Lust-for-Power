@@ -28,7 +28,7 @@ class SaveState
 		//void save_file();
 		void load_file();
 	
-		bool get_temple(int t);
+		bool get_temple (int t);
 		float get_hearts();
 		int get_heart_containers();
 		float get_mp();
@@ -50,6 +50,9 @@ class SaveState
 		void set_easter_egg (int i, bool b);
 		bool get_easter_egg (int i);
 		void tweak_easter_egg (int i);
+		
+		void alter_hearts (float h);
+		void set_hearts (float h);
 
 		void print_report();
 		void print_table();

@@ -6,13 +6,14 @@
 #include "iGraphics.h"
 #include "MapBuilder.h"
 #include "SpriteNode.h"
+#include <math.h>
 
 SaveState save_state;
 MapBuilder map_builder;
 iGraphics iGraph;
 Image Ganondorfs_castle;
 LiveSprite Ganondorf (40, 40, 1, 0, 80, 190);
-Sprite portal (270, 270);
+Sprite portal (337, 270);
 Sprite medallion (50, 50);
 Sprite easter_egg (83, 58); //49, 51
 Sprite forest_map (TILE_SIZE, TILE_SIZE);
@@ -40,7 +41,7 @@ void load_images()
 	heart.load (CO, "Heart.png");
 
 	Epona.load (CO, "Epona.png");
-	Epona.set_position (160, 200);
+	Epona.set_position (360, 230);
 	Epona.select_frame (1, 0);
 	printf("%d\n",Epona.get_screen_y());
 	
@@ -58,15 +59,37 @@ void main_loop()
 	for (int i=0; i<5; i++)
 	{
 		portal.select_frame (i,0);
-		portal.set_position (-70 + i*120, portal_y);
+		portal.set_position (-107 + i*120, portal_y);
 		//portal.draw (&iGraph);
-		sprite_list_head.insert_node (&portal, 5);
+		sprite_list_head.insert_node (&portal, portal.get_sheet_x() == 2 ? 4 : 5);
 	};
 
-		portal.select_frame (save_state.get_phase()+5, 0);
-		portal.set_position (-70 + 5*120, portal_y);
+		//portal.select_frame (save_state.get_phase()+5, 0);
+
+	portal.set_position (-109 + 5*120, portal_y);
+	switch (save_state.get_phase())
+	{
+		case 0: 
+			portal.select_frame (5, 0); 
+			sprite_list_head.insert_node (&portal, 5);
+		break;
+
+		case 1: 
+			portal.select_frame (7, 0);
+			sprite_list_head.insert_node (&portal, 5);
+			portal.select_frame (8, 0);
+			sprite_list_head.insert_node (&portal, 6);
+			break;
+
+		case 2:
+			portal.select_frame (7, 0);
+			sprite_list_head.insert_node (&portal, 5);
+			break;
+	};
+
+		
 		//portal.draw (&iGraph);
-		sprite_list_head.insert_node (&portal, 5);
+		
 
 	for (int i=0; i<6; i++)
 	{
@@ -120,21 +143,76 @@ void main_loop()
 	sprite_list_head.insert_node (&Epona, 5);
 
 
-	for (int i=0; i<3; i++)
+	float hearts = save_state.get_hearts();
+	int whole_hearts = floor (hearts);
+	float fraction = hearts - whole_hearts;
+
+	//printf ("hearts = %0.2f\twhole_hearts = %d\tfraction=%0.2f\n", hearts, whole_hearts, fraction);
+
+	for (int i=0; i<20; i++)
 	{
-		heart.set_position (28*i + 20, 20);
-		heart.select_frame (0, 0);
-		sprite_list_head.insert_node (&heart, 10);
+		if (i < 10)
+			heart.set_position (22*i + 20, 20);
+		else
+			heart.set_position (22*(i-10) + 20, 40);
+
+		
+		if (i < whole_hearts)
+		{
+			heart.select_frame (0, 0);
+		}
+		else if (i == whole_hearts)
+		{
+			if (fraction == 0.0f)
+			{
+				heart.select_frame (4, 0);
+			}
+			else if (fraction == 0.25f)
+			{
+				heart.select_frame (3, 0);
+			}
+			else if (fraction == 0.50f)
+			{
+				heart.select_frame (2, 0);
+			}
+			else if (fraction == 0.75f)
+			{
+				heart.select_frame (1, 0);
+			};
+
+		}
+		else if (i > whole_hearts)
+		{
+			heart.select_frame (4, 0);
+		};
+
+		if (i+1 <= save_state.get_heart_containers())
+			sprite_list_head.insert_node (&heart, 10);
 	};
+
+
+
+	//heart.set_position (22*(i-10) + 20, 40);
+	//heart.select_frame (0, 0);
+	//sprite_list_head.insert_node (&heart, 10);
+	
 	
 
-	iGraph.draw_point (SCREEN_WIDTH/2, 280);
+	//iGraph.draw_point (SCREEN_WIDTH/2, 280);
 	
 
 
 	sprite_list_head.draw_list (&iGraph);
-	sprite_list_head.print_node_line();
+	//sprite_list_head.print_node_line();
 	sprite_list_head.clear();
+
+	int mana_y = save_state.get_heart_containers() > 10 ? 45 : 30;
+
+	iGraph.SetColor (0.0f, 255.0f, 127.0f);
+	iGraph.fill_rectangle (20, mana_y, 234, mana_y + 10);
+	iGraph.SetColor (255.0f, 255.0f, 255.0f);
+	iGraph.draw_rectangle (20, mana_y, 234, mana_y + 10);
+
 };
 
 int main (void)
@@ -187,6 +265,9 @@ void KeyboardInput(int key, int state, int x, int y)
 			case ('i'): save_state.tweak_temple(3); break;
 			case ('o'): save_state.tweak_temple(4); break;
 			case ('p'): save_state.tweak_temple(5); break;
+
+			case ('b'): save_state.alter_hearts (-0.25f); break;
+			case ('n'): save_state.alter_hearts (0.25f); break;
 		};
 
 		if (key>='5' && key<='9')
